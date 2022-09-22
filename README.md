@@ -1,13 +1,4 @@
----
-title: "R-simple-statistics-tutorials"
-author: "Israel Arevalo"
-date: today
-format:
-  markdown_github:
-    toc: true
----
-
-## Before we start
+## Simple R Statistics Tutorials
 
 This guide was designed as a friendly approach to learn how to conduct statistical analysis within the R environment. R is a powerful open-source tool that allows for great flexibility and customization of when conducting data wrangling (cleaning), analysis, interpretation, and reporting. Did I mention its open-source? This not only means that it is free, but the entire code used to develop this exceptional language is entirely available for you to view (and even suggest changes) online.
 
