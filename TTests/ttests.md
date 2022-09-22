@@ -106,21 +106,14 @@ head(df)
 
 ``` r
 hist(intervention_a)
+```
+
+![Speed and Stopping Distances of
+Cars](ttests.markdown_github_files/figure-markdown_github/unnamed-chunk-2-1.png)
+
+``` r
 hist(intervention_b)
 ```
 
-<figure>
-<img
-src="ttests.markdown_github_files/figure-markdown_github/fig-charts-1.png"
-id="fig-charts-1" alt="Figure 1: First" />
-<figcaption aria-hidden="true">Figure 1: First</figcaption>
-</figure>
-
-<figure>
-<img
-src="ttests.markdown_github_files/figure-markdown_github/fig-charts-2.png"
-id="fig-charts-2" alt="Figure 2: Second" />
-<figcaption aria-hidden="true">Figure 2: Second</figcaption>
-</figure>
-
-Charts
+![Vapor Pressure of Mercury as a Function of
+Temperature](ttests.markdown_github_files/figure-markdown_github/unnamed-chunk-2-2.png)

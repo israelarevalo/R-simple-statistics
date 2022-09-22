@@ -61,12 +61,10 @@ head(df)
 ## Exploratory Data Analysis
 
 ```{r}
-#| label: fig-charts
-#| fig-cap: Charts
-#| fig-subcap: 
-#|   - "First"
-#|   - "Second"
 #| layout-ncol: 2
+#| fig-cap: 
+#|   - "Speed and Stopping Distances of Cars"
+#|   - "Vapor Pressure of Mercury as a Function of Temperature"
 
 
 hist(intervention_a)
