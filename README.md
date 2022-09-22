@@ -10,6 +10,6 @@ Each tutorial is made using [Quarto](https://www.quarto.org) within [RStudio](ht
 ## Tutorials
 
 1. [T-Tests](TTests/ttests.md)
-2. [Product-Moment Correlations]
-3. [Analysis of Variance]
-4. [Regressions]
+2. [Product-Moment Correlations]()
+3. [Analysis of Variance]()
+4. [Regressions]()
