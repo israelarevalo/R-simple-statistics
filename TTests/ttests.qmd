@@ -84,6 +84,10 @@ To determine whether this difference is statistically significant, we will proce
 
 ## Conducting T-Test
 
+R allows us to run our analysis with only one line of code. Below is a code block that demonstrates the code that we used to run our T-Test. The *function* that we use to call the T-Test formula is called `t.test`. After this function we have an open/close parenthesis. Within these parenthesis, we place our two groups `intervention_a` and `intervention_b`. 
+
+That's it! We have successfully conducted a simple T-Test using our variables of interest. In the next section, we will be interpreting the output that our `t.test` function generated.
+
 ```{r}
 
 t.test(intervention_a, intervention_b)
