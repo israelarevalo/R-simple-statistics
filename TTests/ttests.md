@@ -9,8 +9,10 @@ Israel Arevalo
     are they and how can we use them?</a>
 -   <a href="#generating-our-dataset"
     id="toc-generating-our-dataset">Generating our Dataset</a>
--   <a href="#exploratory-data-analysis"
-    id="toc-exploratory-data-analysis">Exploratory Data Analysis</a>
+-   <a href="#exploring-our-data" id="toc-exploring-our-data">Exploring our
+    Data</a>
+-   <a href="#conducting-t-test" id="toc-conducting-t-test">Conducting
+    T-Test</a>
 
 ## Before we start
 
@@ -102,22 +104,32 @@ head(df)
     [5,]             96             66
     [6,]             98             68
 
-## Exploratory Data Analysis
+## Exploring our Data
+
+Let’s take a look at simple descriptive statisitcs within our data.
+Running the base (summary) command allows us to look at information such
+as the minimum, maximum, quartiles, median, and means for each variable
+within our dataset. You can further customize this command by adding
+further adjustments to the command itself. For example, if we want to
+run a summary command on just 1 or 2 variables within a dataset
+containing many other variables, we can adjust our code to specify which
+variables we are interested in by adding a `$` symbol after the name of
+the dataset and then specifying the name of the variable (i.e.,
+`summary(df$intervention_a`). Below we have run a simple `summary`
+command to explore our generated dataset. Since we only generated two
+variables, we do not need to specify which variables we are interested
+in.
 
 ``` r
-plot(intervention_a)
+summary(df)
 ```
 
-![](ttests.markdown_github_files/figure-markdown_github/unnamed-chunk-2-1.png)
+     intervention_a  intervention_b  
+     Min.   :62.00   Min.   : 60.00  
+     1st Qu.:69.00   1st Qu.: 68.00  
+     Median :85.00   Median : 80.00  
+     Mean   :81.48   Mean   : 79.84  
+     3rd Qu.:92.00   3rd Qu.: 91.00  
+     Max.   :98.00   Max.   :100.00  
 
-``` r
-plot(intervention_b)
-```
-
-![](ttests.markdown_github_files/figure-markdown_github/unnamed-chunk-2-2.png)
-
-``` r
-#hist(intervention_a)
-
-#hist(intervention_b)
-```
+## Conducting T-Test
