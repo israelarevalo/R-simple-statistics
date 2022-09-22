@@ -4,5 +4,5 @@ This guide was designed as a friendly approach to learn how to conduct statistic
 
 This repository contains a variety of tutorials designed for the beginning R user that is either starting with R as their first statistical analysis environment or for those that are wanting to see what R has to offer. Regardless of where you are in your statistical journey, this repository of tutorials are designed to be easy to follow and provide you with sample code that can be easily copied and pasted into your R environment.
 
-Each tutorial is made using [Quarto][www.quarto.org] within [RStudio][www.rstudio.com]. All documents are available to download through this github repository.
+Each tutorial is made using [Quarto]["www.quarto.org""] within [RStudio]["www.rstudio.com""]. All documents are available to download through this github repository.
 
