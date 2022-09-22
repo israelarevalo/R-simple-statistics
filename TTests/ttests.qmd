@@ -68,23 +68,34 @@ head(df)
 #|   - "Vapor Pressure of Mercury as a Function of Temperature"
 
 
+
+
+
+
 hist(intervention_a)
 
 hist(intervention_b)
 
 ```
 
+:::: {style="display: grid; grid-template-columns: 1fr 1fr; grid-column-gap: 10px; "}
+
+::: {}
 
 ```{r}
-#| label: fig-charts
-#| fig-cap: Charts
-#| fig-subcap: 
-#|   - "Cars"
-#|   - "Pressure"
-#| layout-ncol: 2
-
-plot(cars)
-plot(pressure)
-
+head(iris)
 ```
+
+
+:::
+
+::: {}
+
+```{r}
+plot(iris)
+```
+
+:::
+
+::::
 

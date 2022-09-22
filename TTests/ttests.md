@@ -111,6 +111,10 @@ head(df)
 #|   - "Vapor Pressure of Mercury as a Function of Temperature"
 
 
+
+
+
+
 hist(intervention_a)
 ```
 
@@ -123,22 +127,19 @@ hist(intervention_b)
 ![](ttests.markdown_github_files/figure-markdown_github/unnamed-chunk-2-2.png)
 
 ``` r
-plot(cars)
-plot(pressure)
+head(iris)
 ```
 
-<figure>
-<img
-src="ttests.markdown_github_files/figure-markdown_github/fig-charts-1.png"
-id="fig-charts-1" alt="Figure 1: Cars" />
-<figcaption aria-hidden="true">Figure 1: Cars</figcaption>
-</figure>
+      Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+    1          5.1         3.5          1.4         0.2  setosa
+    2          4.9         3.0          1.4         0.2  setosa
+    3          4.7         3.2          1.3         0.2  setosa
+    4          4.6         3.1          1.5         0.2  setosa
+    5          5.0         3.6          1.4         0.2  setosa
+    6          5.4         3.9          1.7         0.4  setosa
 
-<figure>
-<img
-src="ttests.markdown_github_files/figure-markdown_github/fig-charts-2.png"
-id="fig-charts-2" alt="Figure 2: Pressure" />
-<figcaption aria-hidden="true">Figure 2: Pressure</figcaption>
-</figure>
+``` r
+plot(iris)
+```
 
-Charts
+![](ttests.markdown_github_files/figure-markdown_github/unnamed-chunk-4-1.png)
