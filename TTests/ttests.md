@@ -83,12 +83,16 @@ score of 100. Let’s also assume that we had an equal amount of students
 in each classroom (n = 25).
 
 ``` r
-set.seed(123)
+# A seed allows us to pull in the same randomly generated numbers each time we run this command. If we don't set a seed, we will generate different numbers each time we run this command
+set.seed(123) 
+
+# This command randomly generates a sample of 25 scores between 60-100 for each intervention group (a, b) 
 intervention_a <- sample(60:100, size = 25)
 intervention_b <- sample(60:100, size = 25)
 
 #making the dataframe (combining the two variables into one array) - we will call it "df"
 df = (rbind(intervention_a, intervention_b))
+
 #Transpose Dataframe
 df <- t(df) 
 
