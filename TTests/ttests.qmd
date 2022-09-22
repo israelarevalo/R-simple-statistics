@@ -61,9 +61,13 @@ head(df)
 ## Exploratory Data Analysis
 
 ```{r}
+#| label: fig-charts
+#| fig-cap: Charts
+#| fig-subcap: 
+#|   - "First"
+#|   - "Second"
 #| layout-ncol: 2
 
-#summary(df)
 
 hist(intervention_a)
 hist(intervention_b)
