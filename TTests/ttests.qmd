@@ -62,7 +62,8 @@ head(df)
 
 ```{r}
 #| layout-ncol: 2
-summary(df)
+
+#summary(df)
 
 hist(intervention_a)
 hist(intervention_b)

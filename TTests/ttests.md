@@ -105,18 +105,8 @@ head(df)
 ## Exploratory Data Analysis
 
 ``` r
-summary(df)
-```
+#summary(df)
 
-     intervention_a  intervention_b  
-     Min.   :62.00   Min.   : 60.00  
-     1st Qu.:69.00   1st Qu.: 68.00  
-     Median :85.00   Median : 80.00  
-     Mean   :81.48   Mean   : 79.84  
-     3rd Qu.:92.00   3rd Qu.: 91.00  
-     Max.   :98.00   Max.   :100.00  
-
-``` r
 hist(intervention_a)
 ```
 
