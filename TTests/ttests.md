@@ -142,5 +142,3 @@ id="fig-charts-2" alt="Figure 2: Pressure" />
 </figure>
 
 Charts
-
-\`\`\`

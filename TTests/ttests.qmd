@@ -76,7 +76,6 @@ hist(intervention_b)
 
 
 ```{r}
-```{r}
 #| label: fig-charts
 #| fig-cap: Charts
 #| fig-subcap: 
@@ -86,6 +85,6 @@ hist(intervention_b)
 
 plot(cars)
 plot(pressure)
-```
+
 ```
 
