@@ -132,4 +132,28 @@ summary(df)
      3rd Qu.:92.00   3rd Qu.: 91.00  
      Max.   :98.00   Max.   :100.00  
 
+Based on our summary output, we can see that students that received the
+reading intervention A have a higher mean average score on their
+post-intervention reading task when compared to those students that
+received reading intervention b.
+
+To determine whether this difference is statistically significant, we
+will proceed in conducing our T-Test.
+
 ## Conducting T-Test
+
+``` r
+t.test(intervention_a, intervention_b)
+```
+
+
+        Welch Two Sample t-test
+
+    data:  intervention_a and intervention_b
+    t = 0.45657, df = 47.731, p-value = 0.6501
+    alternative hypothesis: true difference in means is not equal to 0
+    95 percent confidence interval:
+     -5.583308  8.863308
+    sample estimates:
+    mean of x mean of y 
+        81.48     79.84 

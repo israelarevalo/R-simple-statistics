@@ -67,8 +67,17 @@ Let's take a look at simple descriptive statisitcs within our data. Running the 
 summary(df)
 ```
 
+Based on our summary output, we can see that students that received the reading intervention A have a higher mean average score on their post-intervention reading task when compared to those students that received reading intervention b. 
 
+To determine whether this difference is statistically significant, we will proceed in conducing our T-Test.
 
 ## Conducting T-Test
+
+```{r}
+
+t.test(intervention_a, intervention_b)
+
+```
+
 
 
