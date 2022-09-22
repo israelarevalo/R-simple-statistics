@@ -20,9 +20,10 @@ entirely available for you to view (and even suggest changes) online.
 
 Several assumptions about the user will be made within this guide. If
 these assumptions are not met, here are a few guides to reference that
-will get you up to speed \[insert link to R installation here\]. 1. You
-have installed R and an IDE such as RStudio on your computer 2. You have
-a dataset to work with (preferably in .csv format)
+will get you up to speed \[insert link to R installation here\].
+
+1.  You have installed R and an IDE such as RStudio on your computer
+2.  You have a dataset to work with (preferably in .csv format)
 
 ## T-Tests - What are they and how can we use them?
 
@@ -37,16 +38,31 @@ useful guide \[insert link here\]. Below is a short scenario to provide
 you context for the remainder of the tutorial.
 
 As a brief example of a T-Test, let’s say you have two classroom
-teachers that are implementing two different reading interventions in
-their classroom. After a 6-week implementation period, the teachers want
-to know whether there was a significant difference in the students’
-performance between each class. In other words, did the students in
-Classroom A (who received Intervention A) differ in mean reading
-performance scores compared to Classroom B (who received Intervention
-B)? Assuming all students started at the exact same average performance
-in reading, and only one measure was used to determine student reading
-performance scores (post-intervention), we can use a T-Test to compare
-whether there is a significant difference in the mean scores between the
-students in Classroom A and Classroom B.
+teachers that are implementing different reading interventions in their
+classrooms (Intervention A and Intervention B). After a 6-week
+implementation period, the teachers want to know whether there was a
+significant difference in the students’ performance between each class.
+In other words, did the students in Classroom A (who received
+Intervention A) differ in mean reading performance scores compared to
+Classroom B (who received Intervention B)? Assuming all students started
+at the exact same average performance in reading, and only one measure
+was used to determine student reading performance scores
+(post-intervention), we can use a T-Test to compare whether there is a
+significant difference in the mean scores between the students in
+Classroom A and Classroom B.
 
-Us
+> **Note**
+>
+> The above scenario is fictitious and may not be the best way to
+> approach the investigation of an intervention’s efficacy. This
+> scenario is only to give you context for the code we will discuss
+> below.
+
+Using randomly-generated data, let’s build a fictitious dataset to math
+the scenario above and that we will use to run our T-Test.
+
+``` r
+2+2
+```
+
+    [1] 4
