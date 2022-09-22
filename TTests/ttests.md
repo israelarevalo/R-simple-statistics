@@ -105,15 +105,42 @@ head(df)
 ## Exploratory Data Analysis
 
 ``` r
+#| layout-ncol: 2
+#| fig-cap: 
+#|   - "Speed and Stopping Distances of Cars"
+#|   - "Vapor Pressure of Mercury as a Function of Temperature"
+
+
 hist(intervention_a)
 ```
 
-![Speed and Stopping Distances of
-Cars](ttests.markdown_github_files/figure-markdown_github/unnamed-chunk-2-1.png)
+![](ttests.markdown_github_files/figure-markdown_github/unnamed-chunk-2-1.png)
 
 ``` r
 hist(intervention_b)
 ```
 
-![Vapor Pressure of Mercury as a Function of
-Temperature](ttests.markdown_github_files/figure-markdown_github/unnamed-chunk-2-2.png)
+![](ttests.markdown_github_files/figure-markdown_github/unnamed-chunk-2-2.png)
+
+``` r
+plot(cars)
+plot(pressure)
+```
+
+<figure>
+<img
+src="ttests.markdown_github_files/figure-markdown_github/fig-charts-1.png"
+id="fig-charts-1" alt="Figure 1: Cars" />
+<figcaption aria-hidden="true">Figure 1: Cars</figcaption>
+</figure>
+
+<figure>
+<img
+src="ttests.markdown_github_files/figure-markdown_github/fig-charts-2.png"
+id="fig-charts-2" alt="Figure 2: Pressure" />
+<figcaption aria-hidden="true">Figure 2: Pressure</figcaption>
+</figure>
+
+Charts
+
+\`\`\`

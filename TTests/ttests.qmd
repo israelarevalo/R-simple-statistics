@@ -61,6 +61,7 @@ head(df)
 ## Exploratory Data Analysis
 
 ```{r}
+
 #| layout-ncol: 2
 #| fig-cap: 
 #|   - "Speed and Stopping Distances of Cars"
@@ -68,8 +69,23 @@ head(df)
 
 
 hist(intervention_a)
+
 hist(intervention_b)
 
 ```
 
+
+```{r}
+```{r}
+#| label: fig-charts
+#| fig-cap: Charts
+#| fig-subcap: 
+#|   - "Cars"
+#|   - "Pressure"
+#| layout-ncol: 2
+
+plot(cars)
+plot(pressure)
+```
+```
 
