@@ -80,3 +80,9 @@ the scenario above and that we will use to run our T-Test.
     [1] 4
 
 ## Creating our Groups
+
+``` r
+3+3
+```
+
+    [1] 6

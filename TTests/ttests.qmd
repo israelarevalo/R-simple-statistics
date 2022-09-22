@@ -47,3 +47,9 @@ This step is only required for the instructional nature of this tutorial. You wi
 ```
 
 ## Creating our Groups
+
+```{r}
+3+3
+```
+
+
