@@ -15,6 +15,7 @@ Israel Arevalo
     T-Test</a>
 -   <a href="#interpreting-the-results"
     id="toc-interpreting-the-results">Interpreting the Results</a>
+-   <a href="#conclusion" id="toc-conclusion">Conclusion</a>
 
 ## Before we start
 
@@ -185,3 +186,14 @@ studentss’ scores did not vary by a statistically significant amount
 regardless of which reading intervention they received. In other words,
 the mean differences between `intervention_a` and `intervention_b` did
 not vary by a statistically significant amount.
+
+## Conclusion
+
+If you followed along, you can see that running a simple T-Test within
+the R environment is something that can be done quickly once your data
+is cleaned and organized. R provides the flexibility to manipulate and
+transform your data in an efficient and reproducible way. If you haven’t
+already, try copying and pasting these codes into your R environment and
+play with the variables. Also, consider saving your script/rmarkdown
+file for later use as this may significantly increase your research
+workflow.
