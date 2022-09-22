@@ -6,3 +6,10 @@ This repository contains a variety of tutorials designed for the beginning R use
 
 Each tutorial is made using [Quarto](https://www.quarto.org) within [RStudio](https://www.rstudio.com). All documents are available to download through this github repository.
 
+
+## Tutorials
+
+1. [T-Tests](TTests/ttests.md)
+2. [Product-Moment Correlations]
+3. [Analysis of Variance]
+4. [Regressions]
