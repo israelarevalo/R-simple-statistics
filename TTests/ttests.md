@@ -177,13 +177,3 @@ of group 1 is not equal to the mean of group 2.
 To test whether we reject or fail to reject our null hypothesis, we take
 a look at our T-Test results above.
 
-        Welch Two Sample t-test
-
-    data:  intervention_a and intervention_b
-    ***t = 0.45657***, df = 47.731, p-value = 0.6501
-    alternative hypothesis: true difference in means is not equal to 0
-    95 percent confidence interval:
-     -5.583308  8.863308
-    sample estimates:
-    mean of x mean of y 
-        81.48     79.84 
