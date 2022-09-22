@@ -60,9 +60,8 @@ head(df)
 
 ## Exploratory Data Analysis
 
-```{r figures-side, fig.show="hold", out.width="50%"}
-library(tidyverse)
-
+```{r}
+#| layout-ncol: 2
 summary(df)
 
 hist(intervention_a)

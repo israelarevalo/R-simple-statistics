@@ -105,19 +105,6 @@ head(df)
 ## Exploratory Data Analysis
 
 ``` r
-library(tidyverse)
-```
-
-    ── Attaching packages ─────────────────────────────────────── tidyverse 1.3.2 ──
-    ✔ ggplot2 3.3.6      ✔ purrr   0.3.4 
-    ✔ tibble  3.1.8      ✔ dplyr   1.0.10
-    ✔ tidyr   1.2.1      ✔ stringr 1.4.1 
-    ✔ readr   2.1.2      ✔ forcats 0.5.2 
-    ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
-    ✖ dplyr::filter() masks stats::filter()
-    ✖ dplyr::lag()    masks stats::lag()
-
-``` r
 summary(df)
 ```
 
@@ -131,13 +118,12 @@ summary(df)
 
 ``` r
 hist(intervention_a)
+```
+
+![](ttests.markdown_github_files/figure-markdown_github/unnamed-chunk-2-1.png)
+
+``` r
 hist(intervention_b)
 ```
 
-<img
-src="ttests.markdown_github_files/figure-markdown_github/figures-side-1.png"
-style="width:50.0%" />
-
-<img
-src="ttests.markdown_github_files/figure-markdown_github/figures-side-2.png"
-style="width:50.0%" />
+![](ttests.markdown_github_files/figure-markdown_github/unnamed-chunk-2-2.png)
