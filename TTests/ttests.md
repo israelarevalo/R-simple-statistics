@@ -13,6 +13,8 @@ Israel Arevalo
     Data</a>
 -   <a href="#conducting-t-test" id="toc-conducting-t-test">Conducting
     T-Test</a>
+-   <a href="#interpreting-the-results"
+    id="toc-interpreting-the-results">Interpreting the Results</a>
 
 ## Before we start
 
@@ -155,6 +157,30 @@ t.test(intervention_a, intervention_b)
 
     data:  intervention_a and intervention_b
     t = 0.45657, df = 47.731, p-value = 0.6501
+    alternative hypothesis: true difference in means is not equal to 0
+    95 percent confidence interval:
+     -5.583308  8.863308
+    sample estimates:
+    mean of x mean of y 
+        81.48     79.84 
+
+## Interpreting the Results
+
+When we conduct a hypothesis test, we want to establish our Null
+Hypothesis and our Alternative Hypothesis. When conducting T-Tests, our
+Null Hypothesis (H0) is often reported as H0 = Mu1 = Mu2 - in other
+words, the mean of group 1 are equal to the mean of group 2 (in its most
+simplist form). Alternatively (no pun intended), our alternative
+hypothesis (H1) states that H1 = Mu1 != Mu2 - in other words, the mean
+of group 1 is not equal to the mean of group 2.
+
+To test whether we reject or fail to reject our null hypothesis, we take
+a look at our T-Test results above.
+
+        Welch Two Sample t-test
+
+    data:  intervention_a and intervention_b
+    ***t = 0.45657***, df = 47.731, p-value = 0.6501
     alternative hypothesis: true difference in means is not equal to 0
     95 percent confidence interval:
      -5.583308  8.863308
