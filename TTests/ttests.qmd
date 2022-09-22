@@ -40,16 +40,34 @@ This step is only required for the instructional nature of this tutorial. You wi
 :::
 
 
+In the code block below, we will generate an array consisting of test scores from students (rows) who received intervention A and B (columns). Since we are taking quite the creative freedoms here, let's also assume that all students score at least a 60 or above with the max possible score of 100. Let's also assume that we had an equal amount of students in each classroom (n = 25).
+
 ```{r}
-2+2
+set.seed(123)
+intervention_a <- sample(60:100, size = 25)
+intervention_b <- sample(60:100, size = 25)
 
+#making the dataframe (combining the two variables into one array) - we will call it "df"
+df = (rbind(intervention_a, intervention_b))
+#Transpose Dataframe
+df <- t(df) 
 
+#Display first 6 rows in our data
+head(df)
 ```
 
-## Creating our Groups
 
-```{r}
-3+3
+
+## Exploratory Data Analysis
+
+```{r figures-side, fig.show="hold", out.width="50%"}
+library(tidyverse)
+
+summary(df)
+
+hist(intervention_a)
+hist(intervention_b)
+
 ```
 
 

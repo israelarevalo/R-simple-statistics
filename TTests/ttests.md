@@ -9,8 +9,8 @@ Israel Arevalo
     are they and how can we use them?</a>
 -   <a href="#generating-our-dataset"
     id="toc-generating-our-dataset">Generating our Dataset</a>
--   <a href="#creating-our-groups" id="toc-creating-our-groups">Creating our
-    Groups</a>
+-   <a href="#exploratory-data-analysis"
+    id="toc-exploratory-data-analysis">Exploratory Data Analysis</a>
 
 ## Before we start
 
@@ -73,16 +73,71 @@ the scenario above and that we will use to run our T-Test.
 > tutorial. You will **not** need to run this step as you do not need to
 > randomly generate your data.
 
+In the code block below, we will generate an array consisting of test
+scores from students (rows) who received intervention A and B (columns).
+Since we are taking quite the creative freedoms here, let’s also assume
+that all students score at least a 60 or above with the max possible
+score of 100. Let’s also assume that we had an equal amount of students
+in each classroom (n = 25).
+
 ``` r
-2+2
+set.seed(123)
+intervention_a <- sample(60:100, size = 25)
+intervention_b <- sample(60:100, size = 25)
+
+#making the dataframe (combining the two variables into one array) - we will call it "df"
+df = (rbind(intervention_a, intervention_b))
+#Transpose Dataframe
+df <- t(df) 
+
+#Display first 6 rows in our data
+head(df)
 ```
 
-    [1] 4
+         intervention_a intervention_b
+    [1,]             90             98
+    [2,]             74             71
+    [3,]             73             74
+    [4,]             62             91
+    [5,]             96             66
+    [6,]             98             68
 
-## Creating our Groups
+## Exploratory Data Analysis
 
 ``` r
-3+3
+library(tidyverse)
 ```
 
-    [1] 6
+    ── Attaching packages ─────────────────────────────────────── tidyverse 1.3.2 ──
+    ✔ ggplot2 3.3.6      ✔ purrr   0.3.4 
+    ✔ tibble  3.1.8      ✔ dplyr   1.0.10
+    ✔ tidyr   1.2.1      ✔ stringr 1.4.1 
+    ✔ readr   2.1.2      ✔ forcats 0.5.2 
+    ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+    ✖ dplyr::filter() masks stats::filter()
+    ✖ dplyr::lag()    masks stats::lag()
+
+``` r
+summary(df)
+```
+
+     intervention_a  intervention_b  
+     Min.   :62.00   Min.   : 60.00  
+     1st Qu.:69.00   1st Qu.: 68.00  
+     Median :85.00   Median : 80.00  
+     Mean   :81.48   Mean   : 79.84  
+     3rd Qu.:92.00   3rd Qu.: 91.00  
+     Max.   :98.00   Max.   :100.00  
+
+``` r
+hist(intervention_a)
+hist(intervention_b)
+```
+
+<img
+src="ttests.markdown_github_files/figure-markdown_github/figures-side-1.png"
+style="width:50.0%" />
+
+<img
+src="ttests.markdown_github_files/figure-markdown_github/figures-side-2.png"
+style="width:50.0%" />
