@@ -7,6 +7,10 @@ Israel Arevalo
 -   <a href="#t-tests---what-are-they-and-how-can-we-use-them"
     id="toc-t-tests---what-are-they-and-how-can-we-use-them">T-Tests - What
     are they and how can we use them?</a>
+-   <a href="#generating-our-dataset"
+    id="toc-generating-our-dataset">Generating our Dataset</a>
+-   <a href="#creating-our-groups" id="toc-creating-our-groups">Creating our
+    Groups</a>
 
 ## Before we start
 
@@ -58,11 +62,21 @@ Classroom A and Classroom B.
 > scenario is only to give you context for the code we will discuss
 > below.
 
+## Generating our Dataset
+
 Using randomly-generated data, let’s build a fictitious dataset to math
 the scenario above and that we will use to run our T-Test.
+
+> **Warning**
+>
+> This step is only required for the instructional nature of this
+> tutorial. You will **not** need to run this step as you do not need to
+> randomly generate your data.
 
 ``` r
 2+2
 ```
 
     [1] 4
+
+## Creating our Groups

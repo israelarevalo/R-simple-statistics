@@ -29,7 +29,16 @@ The above scenario is fictitious and may not be the best way to approach the inv
 
 :::
 
-Using randomly-generated data, let's build a fictitious dataset to math the scenario above and that we will use to run our T-Test.
+## Generating our Dataset
+
+Using randomly-generated data, let's build a fictitious dataset to math the scenario above and that we will use to run our T-Test. 
+
+::: {.callout-warning appearance="simple"}
+
+This step is only required for the instructional nature of this tutorial. You will **not** need to run this step as you do not need to randomly generate your data.
+
+:::
+
 
 ```{r}
 2+2
@@ -37,3 +46,4 @@ Using randomly-generated data, let's build a fictitious dataset to math the scen
 
 ```
 
+## Creating our Groups
