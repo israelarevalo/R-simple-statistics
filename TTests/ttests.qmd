@@ -61,41 +61,14 @@ head(df)
 ## Exploratory Data Analysis
 
 ```{r}
-
 #| layout-ncol: 2
-#| fig-cap: 
-#|   - "Speed and Stopping Distances of Cars"
-#|   - "Vapor Pressure of Mercury as a Function of Temperature"
 
+plot(intervention_a)
+plot(intervention_b)
 
+#hist(intervention_a)
 
-
-
-
-hist(intervention_a)
-
-hist(intervention_b)
+#hist(intervention_b)
 
 ```
-
-:::: {style="display: grid; grid-template-columns: 1fr 1fr; grid-column-gap: 10px; "}
-
-::: {}
-
-```{r}
-head(iris)
-```
-
-
-:::
-
-::: {}
-
-```{r}
-plot(iris)
-```
-
-:::
-
-::::
 
