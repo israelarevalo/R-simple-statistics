@@ -177,3 +177,11 @@ of group 1 is not equal to the mean of group 2.
 To test whether we reject or fail to reject our null hypothesis, we take
 a look at our T-Test results above.
 
+Now, let’s take a look at our T-Test output. We can see that we have a
+`t-value` of `0.457`, `degrees of freedom` of `47.731` and a significant
+value `(p-value)` of `0.65`. Based on these results, we would ***fail to
+reject*** our null hypothesis and conclude that based on our data,
+studentss’ scores did not vary by a statistically significant amount
+regardless of which reading intervention they received. In other words,
+the mean differences between `intervention_a` and `intervention_b` did
+not vary by a statistically significant amount.
