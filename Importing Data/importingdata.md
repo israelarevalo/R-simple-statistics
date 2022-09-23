@@ -14,8 +14,14 @@ This guide was created to assist a new user of R in importing your
 dataset. R is a powerful tool that allows the user to import a variety
 of data types (i.e., .csv, .sas, .dat, and more).
 
-#\| Note: Some data types will require for you to take an additional
-step before you can successfully import your data.
+<div>
+
+> **Note**
+>
+> Some data types will require for you to take an additional step before
+> you can successfully import your data.
+
+</div>
 
 Specifically, these data types include:
 
