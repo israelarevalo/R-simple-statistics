@@ -12,59 +12,90 @@ output:
 
 ## Getting Started
 
-This guide was created to assist a new user of R in importing your dataset. R is a powerful tool that allows the user to import a variety of data types (i.e., .csv, .sas, .dat, and more). To start, we want to download a package called `haven` by running the following code. 
+This guide was created to assist a new user of R in importing a dataset. R is a powerful tool that allows the user to import a variety of data types (i.e., .csv, .sav, .dat, and more). To start, we want to download a package called `haven` by running the following code. 
 
 > **Note** \n\
-> Before copying/pasting into your IDE (i.e., RStudio), please make sure to not copy the `#` as it will make a note instead of run the `install.packages` function.
+> While R supports reading filetypes such as .csv, not all data comes in this format. Therefore, we will be installing the `haven` package to allow us to import various different file types
 
 ```
 install.packages('haven')
 ```
 
-Now that we've downloaded the `haven` package, let's load it into our environment. We will do that by running the `library` function. Notice that now that we have installed our library, we don't need to wrap our library's name with " " or ' '. However, doing so will not yield an error.
+Now that we've downloaded the `haven` package, let's load it into our environment. We will do that by running the `library` function. Notice that now that we have installed our package, we don't need to wrap our package's name with " " or ' '. However, doing so will not yield an error.
 
 ```
 library(haven)
 ```
 
+The Haven package will allow you to import a variety of data types into your R environment. In order to `read` these datasets, we will be using the `read_DATATYPE` function within the Haven package. You can find the full documentation for the Haven library [here](https://cran.r-project.org/web/packages/haven/haven.pdf). The Haven package allows the user to read .dta, .sas, .spss, and .xpt files. 
+
+Of important note, if you are importing a natively supported datatype such as `.csv`, [click here](#importing-csv-files-into-r) to skip the following sections and navigate to the (Importing CSV files into R) section of this tutorial.
 
 
-The Haven library will allow you to import a variety of data types into your R environment. In order to `read` these datasets, we will be using the `read_DATATYPE` function. Let's take a look at that now
+#### Before Moving On
 
-
-
-Some data types will require for you to take an additional step before you can successfully import your data. 
-
-
-
-Specifically, these data types include:
-
-* data 1
-* data 2
-* data 3
-
-For this reason, I recommend you start with a .csv file if you are able to. If you have an alternative data type specific to a particular statistical package (i.e., SPSS), you can export your dataset into a .csv format; however, the steps to that procedure are beyond the scope of this article. 
-
-If you are unable to initially import your data as a .csv format, scroll to the bottom 
-
-
-## Importing from a Mac environment
-
-To begin our tutorial, we will discuss importing your dataset from within a Mac environment. Several assumptions are made prior to this process. 
+Several assumptions are made prior to this process. 
 
 1. You have installed R on your computer.
 2. You have installed an Integrated Development Environment (IDE) like Rstudio on your computer.
 3. You have a dataset that you can import into RStudio.
 
+
+
+## Importing Data into R Environment
+
+Now that we have installed the `haven` package, let's start importing our data. Importing your data is the same, regardless of whether you are using a MacOS, Windows, or Linux; however, you may come across issues when running your code on different operating systems. This is due to the fact that the paths (even though they may be in the same folder) may vary slightly due to the nature of the operating system. This can be a problem if you house your dataset in a different folder than the one you created your Rmarkdown/Rscript document. To avoid this issue, a common practice is to house your dataset and your R document within the same folder. However, this may not always be possible. A workaround this issue is to create a `read_DATATYPE` command for each environment you will be working on and comment out `#` the one you are not using at the time. 
+
+Now, let's see how importing a file looks like. In the example below, we are importing a dataset that is located within the same folder as our R file and calling it `df`.
+
+```
+df <- read_spss(mylovelydata.sav)
 ```
 
-# Importing dataset from existing file and calling it 'df'
+Now let's look at how our command would look like if our data is located in a different path than our R file. Notice how the path now needs to be wrapped using a `"`. 
 
-df <- read.csv('dataset.csv')
+```
+df <- read_spss("E:\Dropbox\Research\Data\mylovelydata.sav")
+```
+
+### What about other data types?
+
+Here's a list of the read functions that come within the `haven` package to help you import your dataset into R.
 
 
 ```
+# Importing SPSS Data Files
+df <- read_spss(mylovelydata.sav)
 
-# Importing from a Windows environment
 
-Importing your data within a Windows environment is very similar to what we have dissed up to this point. Also, we will be making the same assumptions we have previously discussed (installed R, installed RStudio, and have a dataset). 
+# Importing Stata DTA Files
+df <- read_dat(mylovelydata.dta)
+
+
+# Importing SAS Data
+df <- read_sas(mylovelydata.sas7bdat)
+```
+
+## Importing CSV and Excel files into R
+
+Importing a `.csv` file into R is very similar to importing a file using the `haven` package; however, instead of using the `read_DATATYPE` function, we will be using `read.csv` function from native R. Let's view this command by importing a dataset called `mylovelydata.csv` into a dataframe called `df`.
+
+```
+# Importing CSV File
+df <- read.csv("E:\Dropbox\Research\Data\mylovelydata.csv")
+```
+
+Lastly, we will review importing Excel files into R. To do this, we will need to download a package called `xlsx` that will allow us to read `.xlsx` files. Below is an example of how we would install and load the package, read the data, and call it 'df'. 
+
+```
+install.packages('xlsx')
+library(xlsx)
+
+df <- read.xlsx("E:\Dropbox\Research\Data\mylovelydata.xlsx")
+
+```
+
+## Conclusion
+
+While short, I hope this guide provided you with the basics on importing your data into the R environment. For further details, alternative methods, and documentation on importing data into R, please visit [RStudio's](https://support.rstudio.com/hc/en-us/articles/218611977-Importing-Data-with-the-RStudio-IDE) guide on this topic.
+
