@@ -1,7 +1,12 @@
-Conducting T-Tests in R - A Friendly Introduction
-================
-Israel Arevalo
-9/22/22
+---
+author:
+- Israel Arevalo
+authors:
+- Israel Arevalo
+date: 9/23/22
+title: Importing Data into R
+toc-title: Table of contents
+---
 
 # Introduction
 
@@ -10,8 +15,13 @@ dataset. R is a powerful tool that allows the user to import a variety
 of data types (i.e., .csv, .sas, .dat, and more).
 
 #\| Note: Some data types will require for you to take an additional
-step before you can successfully import your data. Specifically, these
-data types include: \* data 1 \* data 2 \* data 3
+step before you can successfully import your data.
+
+Specifically, these data types include:
+
+-   data 1
+-   data 2
+-   data 3
 
 For this reason, I recommend you start with a .csv file if you are able
 to. If you have an alternative data type specific to a particular
@@ -33,10 +43,11 @@ process.
     Rstudio on your computer.
 3.  You have a dataset that you can import into RStudio.
 
-
+::: cell
 ``` {.r .cell-code}
 # df <- read.csv("INSERT PATH HERE")
 ```
+:::
 
 # Importing from a Windows environment
 
@@ -45,6 +56,8 @@ we have dissed up to this point. Also, we will be making the same
 assumptions we have previously discussed (installed R, installed
 RStudio, and have a dataset).
 
+::: cell
 ``` {.r .cell-code}
 # df <- read.csv("INSERT PATH HERE")
 ```
+:::
