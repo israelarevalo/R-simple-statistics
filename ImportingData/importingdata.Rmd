@@ -2,7 +2,7 @@
 title: "Importing Data into R"
 subtitle: "A friendly guide into R"
 author: "Israel Arevalo"
-date: today
+date: "`r Sys.Date()`"
 output: 
   github_document:
     toc: true

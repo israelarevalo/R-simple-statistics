@@ -1,7 +1,7 @@
 Importing Data into R
 ================
 Israel Arevalo
-today
+2022-09-23
 
 -   <a href="#introduction" id="toc-introduction">Introduction</a>
 -   <a href="#importing-from-a-mac-environment"
