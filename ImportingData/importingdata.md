@@ -3,7 +3,7 @@ Importing Data into R
 Israel Arevalo
 2022-09-23
 
--   <a href="#introduction" id="toc-introduction">Introduction</a>
+-   <a href="#getting-started" id="toc-getting-started">Getting Started</a>
 -   <a href="#importing-from-a-mac-environment"
     id="toc-importing-from-a-mac-environment">Importing from a Mac
     environment</a>
@@ -11,18 +11,34 @@ Israel Arevalo
     id="toc-importing-from-a-windows-environment">Importing from a Windows
     environment</a>
 
-## Introduction
+## Getting Started
 
 This guide was created to assist a new user of R in importing your
 dataset. R is a powerful tool that allows the user to import a variety
-of data types (i.e., .csv, .sas, .dat, and more).
+of data types (i.e., .csv, .sas, .dat, and more). To start, we want to
+download a package called `haven` by running the following code.
 
-<div class="callout-note" appearance="simple">
+> **Note**   
+> Before copying/pasting into your IDE (i.e., RStudio), please make sure
+> to not copy the `#` as it will make a note instead of run the
+> `install.packages` function.
+
+    install.packages('haven')
+
+Now that we’ve downloaded the `haven` package, let’s load it into our
+environment. We will do that by running the `library` function. Notice
+that now that we have installed our library, we don’t need to wrap our
+library’s name with ” ” or ’ ’. However, doing so will not yield an
+error.
+
+    library(haven)
+
+The Haven library will allow you to import a variety of data types into
+your R environment. In order to `read` these datasets, we will be using
+the `read_DATATYPE` function. Let’s take a look at that now
 
 Some data types will require for you to take an additional step before
 you can successfully import your data.
-
-</div>
 
 Specifically, these data types include:
 
@@ -50,11 +66,12 @@ process.
     Rstudio on your computer.
 3.  You have a dataset that you can import into RStudio.
 
-``` r
-# Importing dataset from existing file and calling it 'df'
+<!-- -->
 
-#df <- read.csv('dataset.csv')
-```
+
+    # Importing dataset from existing file and calling it 'df'
+
+    df <- read.csv('dataset.csv')
 
 # Importing from a Windows environment
 
