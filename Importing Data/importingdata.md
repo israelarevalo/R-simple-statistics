@@ -1,12 +1,7 @@
----
-author:
-- Israel Arevalo
-authors:
-- Israel Arevalo
-date: 9/23/22
-title: Importing Data into R
-toc-title: Table of contents
----
+Conducting T-Tests in R - A Friendly Introduction
+================
+Israel Arevalo
+9/22/22
 
 # Introduction
 
