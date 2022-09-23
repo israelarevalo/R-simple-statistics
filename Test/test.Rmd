@@ -1,6 +1,11 @@
 ---
-title: "Untitled"
-output: github_document
+title: "Importing Data into R"
+subtitle: "A friendly guide into R"
+author: "Israel Arevalo"
+date: today
+output: 
+  github_document:
+    toc: true
 ---
 
 
