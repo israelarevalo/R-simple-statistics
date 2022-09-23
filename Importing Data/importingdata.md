@@ -4,7 +4,7 @@ author:
 authors:
 - Israel Arevalo
 date: 9/23/22
-title: Importing your data
+title: Importing Data into R
 toc-title: Table of contents
 ---
 
@@ -38,7 +38,7 @@ process.
     Rstudio on your computer.
 3.  You have a dataset that you can import into RStudio.
 
-::: {.cell warnings="false"}
+::: cell
 ``` {.r .cell-code}
 # df <- read.csv("INSERT PATH HERE")
 ```
@@ -51,7 +51,7 @@ we have dissed up to this point. Also, we will be making the same
 assumptions we have previously discussed (installed R, installed
 RStudio, and have a dataset).
 
-::: {.cell warnings="false"}
+::: cell
 ``` {.r .cell-code}
 # df <- read.csv("INSERT PATH HERE")
 ```
