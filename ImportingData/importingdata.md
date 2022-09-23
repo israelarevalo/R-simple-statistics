@@ -43,10 +43,9 @@ full documentation for the Haven library
 [here](https://cran.r-project.org/web/packages/haven/haven.pdf). The
 Haven package allows the user to read .dta, .sas, .spss, and .xpt files.
 
-Of important note, if you are importing a natively supported datatype
-such as `.csv`, [click here](#importing-csv-files-into-r) to skip the
-following sections and navigate to the (Importing CSV files into R)
-section of this tutorial.
+If you are importing a natively supported datatype such as `.csv`, feel
+free to skip the following sections and navigate to the (Importing CSV
+files into R) section of this tutorial.
 
 #### Before Moving On
 
