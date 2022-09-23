@@ -1,10 +1,7 @@
----
-author:
-- Israel Arevalo
-date: 9/23/22
-title: Importing Data into R
-toc-title: Table of contents
----
+Importing Data into R
+================
+Israel Arevalo
+9/22/22
 
 # Introduction
 
