@@ -2,10 +2,7 @@
 title: "Importing Data into R"
 author: "Israel Arevalo"
 date: today
-output:
-  github_document:
-    toc: true
-    echo: false
+output: github_document
 ---
 
 
