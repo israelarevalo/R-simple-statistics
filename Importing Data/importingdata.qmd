@@ -3,9 +3,7 @@ title: "Importing your data"
 author: "Israel Arevalo"
 date: today
 format:
-  html:
-    toc: true
-  hugo: 
+  markdown_github:
     toc: true
 ---
 
@@ -18,7 +16,7 @@ This guide was created to assist a new user of R in importing your dataset. R is
 * data 2
 * data 3
 
-For this reason, I recommend you start with a .csv file if you are able to. If you have an alternative data type specific to a particular statistical package (i.e., SPSS), you can export your dataset into a .csv format; however, the steps to that proceedure are beyond the scope of this article. 
+For this reason, I recommend you start with a .csv file if you are able to. If you have an alternative data type specific to a particular statistical package (i.e., SPSS), you can export your dataset into a .csv format; however, the steps to that procedure are beyond the scope of this article. 
 
 If you are unable to initially import your data as a .csv format, scroll to the bottom 
 
