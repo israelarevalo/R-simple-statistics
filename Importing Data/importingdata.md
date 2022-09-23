@@ -1,9 +1,14 @@
-Importing Data into R
-================
-Israel Arevalo
-9/22/22
+---
+author:
+- Israel Arevalo
+authors:
+- Israel Arevalo
+date: 9/23/22
+title: Importing Data into R
+toc-title: Table of contents
+---
 
-# Introduction
+## Introduction
 
 This guide was created to assist a new user of R in importing your
 dataset. R is a powerful tool that allows the user to import a variety
@@ -33,7 +38,7 @@ of this article.
 If you are unable to initially import your data as a .csv format, scroll
 to the bottom
 
-# Importing from a Mac environment
+## Importing from a Mac environment
 
 To begin our tutorial, we will discuss importing your dataset from
 within a Mac environment. Several assumptions are made prior to this
@@ -44,11 +49,13 @@ process.
     Rstudio on your computer.
 3.  You have a dataset that you can import into RStudio.
 
+::: cell
+``` {.r .cell-code}
+# Importing dataset from existing file and calling it 'df'
 
-``` {r}
-# df <- read.csv("INSERT PATH HERE")
+#df <- read.csv('dataset.csv')
 ```
-
+:::
 
 # Importing from a Windows environment
 
@@ -56,8 +63,3 @@ Importing your data within a Windows environment is very similar to what
 we have dissed up to this point. Also, we will be making the same
 assumptions we have previously discussed (installed R, installed
 RStudio, and have a dataset).
-
-
-``` {r}
-# df <- read.csv("INSERT PATH HERE")
-```

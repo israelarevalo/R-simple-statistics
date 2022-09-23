@@ -9,6 +9,7 @@ format:
 ---
 
 
+
 ## Introduction
 
 This guide was created to assist a new user of R in importing your dataset. R is a powerful tool that allows the user to import a variety of data types (i.e., .csv, .sas, .dat, and more). 
@@ -39,17 +40,20 @@ To begin our tutorial, we will discuss importing your dataset from within a Mac 
 2. You have installed an Integrated Development Environment (IDE) like Rstudio on your computer.
 3. You have a dataset that you can import into RStudio.
 
-```{r}
 
+::: {.cell}
+
+```{.r .cell-code}
 # Importing dataset from existing file and calling it 'df'
 
 #df <- read.csv('dataset.csv')
-
-
 ```
+:::
+
 
 # Importing from a Windows environment
 
 Importing your data within a Windows environment is very similar to what we have dissed up to this point. Also, we will be making the same assumptions we have previously discussed (installed R, installed RStudio, and have a dataset). 
+
 
 
