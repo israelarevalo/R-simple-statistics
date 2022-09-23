@@ -9,7 +9,8 @@ Each tutorial is made using [Quarto](https://www.quarto.org) within [RStudio](ht
 
 ## Tutorials
 
-1. [T-Tests](T-Tests/ttests.md)
-2. [Product-Moment Correlations - *in progress*]()
-3. [Analysis of Variance - *in progress*]()
-4. [Regressions - *in progress*]()
+1. [Importing Data into R](Importing Data/importingdata.md)
+2. [T-Tests](T-Tests/ttests.md)
+3. [Product-Moment Correlations - *in progress*]()
+4. [Analysis of Variance - *in progress*]()
+5. [Regressions - *in progress*]()
