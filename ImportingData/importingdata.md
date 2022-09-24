@@ -54,7 +54,7 @@ Several assumptions are made prior to this process.
 
 1.  You have installed R on your computer.
 2.  You have installed an Integrated Development Environment (IDE) like
-    Rstudio on your computer.
+    RStudio on your computer.
 3.  You have a dataset that you can import into RStudio.
 
 ## Importing Data into R Environment
