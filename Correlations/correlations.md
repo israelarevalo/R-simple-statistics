@@ -27,11 +27,7 @@ set.seed(123)  # for reproducibility
 
 # Loading libraries
 library(ggplot2)
-```
 
-    ## Warning: package 'ggplot2' was built under R version 4.2.2
-
-``` r
 # create the data set
 data <- data.frame(student_id = 1:30,
                    math_score = rnorm(30, mean = 70, sd = 10),
@@ -143,9 +139,7 @@ ggplot(data, aes(x = math_score, y = reading_score)) +
   ggtitle("Scatter plot of Math Scores vs Reading Scores")
 ```
 
-    ## `geom_smooth()` using formula = 'y ~ x'
-
-![](index_files/figure-gfm/unnamed-chunk-4-1.png)<!-- -->
+![](correlations_files/figure-gfm/unnamed-chunk-4-1.png)<!-- -->
 
 This plot shows the relationship between the `math_score` and
 `reading_score` variables, and can help to further illustrate the

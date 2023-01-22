@@ -16,7 +16,7 @@ Correlation is a statistical measure that can be used to determine the strength 
 
 First, we will need to load in the necessary packages and create the simulated data set. For this tutorial, we will create a data set that contains information on students' math scores and reading scores.
 
-```{r}
+```{r message=FALSE, warning=FALSE}
 
 set.seed(123)  # for reproducibility
 
@@ -73,7 +73,7 @@ The last value is the confidence interval, which is a range of values that is li
 
 Finally, we can create a scatter plot to visualize the relationship between the two variables.
 
-```{r}
+```{r message=FALSE, warning=FALSE}
 
 ggplot(data, aes(x = math_score, y = reading_score)) +
   geom_smooth(method = "lm", color = "red") +
