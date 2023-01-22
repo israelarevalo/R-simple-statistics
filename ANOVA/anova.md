@@ -9,7 +9,9 @@ Israel Arevalo
   Preparation</a>
 - <a href="#setting-up-the-anova-model"
   id="toc-setting-up-the-anova-model">Setting up the ANOVA Model</a>
-- <a href="#post-hoc-tests" id="toc-post-hoc-tests">Post-hoc Tests</a>
+- <a href="#post-hoc-tests-and-interpretation"
+  id="toc-post-hoc-tests-and-interpretation">Post-hoc Tests and
+  Interpretation</a>
 - <a href="#visualizing-the-results"
   id="toc-visualizing-the-results">Visualizing the Results</a>
 
@@ -71,7 +73,7 @@ str(data)
     ## 'data.frame':    30 obs. of  3 variables:
     ##  $ student_id: int  1 2 3 4 5 6 7 8 9 10 ...
     ##  $ grade     : chr  "3rd grade" "3rd grade" "3rd grade" "3rd grade" ...
-    ##  $ math_score: num  68.6 91.5 86.4 68.7 75.8 ...
+    ##  $ math_score: num  81.7 87 67 69.8 78.4 ...
 
 ADD INFORMATION HERE
 
@@ -93,9 +95,9 @@ We can then use the summary() function to view the results of the ANOVA.
 summary(model)
 ```
 
-    ##             Df Sum Sq Mean Sq F value  Pr(>F)   
-    ## grade        2   1086   542.9   5.716 0.00851 **
-    ## Residuals   27   2564    95.0                   
+    ##             Df Sum Sq Mean Sq F value Pr(>F)   
+    ## grade        2   1065   532.5   5.822 0.0079 **
+    ## Residuals   27   2469    91.5                  
     ## ---
     ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
@@ -103,7 +105,7 @@ The output will show the F-value and the p-value for the ANOVA. A low
 p-value (typically less than 0.05) indicates that there is a significant
 difference in the means of the groups.
 
-# Post-hoc Tests
+# Post-hoc Tests and Interpretation
 
 After conducting the ANOVA, we can conduct post-hoc tests to determine
 which specific groups are significantly different from each other. One
@@ -125,9 +127,9 @@ summary(tukey)
     ## 
     ## Linear Hypotheses:
     ##                            Estimate Std. Error t value Pr(>|t|)   
-    ## 4th grade - 3rd grade == 0  -10.547      4.358  -2.420  0.05680 . 
-    ## 5th grade - 3rd grade == 0  -14.186      4.358  -3.255  0.00818 **
-    ## 5th grade - 4th grade == 0   -3.639      4.358  -0.835  0.68486   
+    ## 4th grade - 3rd grade == 0   -5.286      4.277  -1.236  0.44293   
+    ## 5th grade - 3rd grade == 0  -14.424      4.277  -3.373  0.00618 **
+    ## 5th grade - 4th grade == 0   -9.138      4.277  -2.137  0.10116   
     ## ---
     ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
     ## (Adjusted p values reported -- single-step method)

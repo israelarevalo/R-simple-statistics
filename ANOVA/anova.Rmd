@@ -86,7 +86,7 @@ summary(model)
 
 The output will show the F-value and the p-value for the ANOVA. A low p-value (typically less than 0.05) indicates that there is a significant difference in the means of the groups.
 
-# Post-hoc Tests
+# Post-hoc Tests and Interpretation
 
 After conducting the ANOVA, we can conduct post-hoc tests to determine which specific groups are significantly different from each other. One commonly used post-hoc test is the Tukey Honest Significant Differences (HSD) test.
 
