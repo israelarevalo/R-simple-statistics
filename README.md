@@ -14,3 +14,5 @@ Each tutorial is made using [Quarto](https://www.quarto.org) within [RStudio](ht
 3. [Product-Moment Correlations](Correlations/correlations.md)
 4. [Analysis of Variance](ANOVA/anova.md)
 5. [Simple Linear Regression](SimpleRegression/simpleregression.md)
+6. [Multiple Linear Regressions in R (Under Development)]()
+7. [Introduction to SEM in R (Under Development)]()
