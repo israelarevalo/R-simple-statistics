@@ -98,7 +98,7 @@ Overall, the results show that the slope `study_hours` is statistically signific
 
 Finally, we can create a scatter plot of the data with the line of best fit to visualize the relationship between the two variables.
 
-```{r}
+```{r message=FALSE, warning=FALSE}
 
 ggplot(data, aes(x = study_hours, y = math_score)) +
   geom_point() +
@@ -106,6 +106,8 @@ ggplot(data, aes(x = study_hours, y = math_score)) +
   ggtitle("Scatter plot of Math Scores vs Study Hours")
 
 ```
+
+
 
 This plot shows the relationship between the `math_score` and `study_hours` variables, and can help to further illustrate the strength and direction of the relationship modeled by the linear regression. The line of best fit (in red) shows the direction of the relationship and the slope of the line represents the strength of the relationship.
 
