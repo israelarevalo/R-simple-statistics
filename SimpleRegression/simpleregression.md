@@ -162,9 +162,7 @@ ggplot(data, aes(x = study_hours, y = math_score)) +
   ggtitle("Scatter plot of Math Scores vs Study Hours")
 ```
 
-    ## `geom_smooth()` using formula = 'y ~ x'
-
-![](SimpleRegression_files/figure-gfm/unnamed-chunk-6-1.png)<!-- -->
+![](simpleregression_files/figure-gfm/unnamed-chunk-6-1.png)<!-- -->
 
 This plot shows the relationship between the `math_score` and
 `study_hours` variables, and can help to further illustrate the strength

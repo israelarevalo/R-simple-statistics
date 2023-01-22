@@ -98,7 +98,7 @@ Overall, the results show that the slope `study_hours` is statistically signific
 
 Finally, we can create a scatter plot of the data with the line of best fit to visualize the relationship between the two variables.
 
-```{r}
+```{r message=FALSE, warning=FALSE}
 
 ggplot(data, aes(x = study_hours, y = math_score)) +
   geom_point() +
