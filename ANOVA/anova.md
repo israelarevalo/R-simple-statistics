@@ -3,6 +3,8 @@ Conducting Analysis of Variance in R
 Israel Arevalo
 2023-01-22
 
+- <a href="#loading-required-packages"
+  id="toc-loading-required-packages">Loading required packages</a>
 - <a href="#data-preparation" id="toc-data-preparation">Data
   Preparation</a>
 - <a href="#setting-up-the-anova-model"
@@ -37,6 +39,13 @@ For additional information, please follow the links below as necessary.
 - [Exporting Excel file to
   .csv](https://support.microsoft.com/en-us/office/import-or-export-text-txt-or-csv-files-5250ac4c-663c-47ce-937b-339e391393ba)
 
+# Loading required packages
+
+``` r
+library(multcomp)
+library(ggplot2)
+```
+
 # Data Preparation
 
 First, we will need to load in the necessary packages and the data set.
@@ -62,7 +71,7 @@ str(data)
     ## 'data.frame':    30 obs. of  3 variables:
     ##  $ student_id: int  1 2 3 4 5 6 7 8 9 10 ...
     ##  $ grade     : chr  "3rd grade" "3rd grade" "3rd grade" "3rd grade" ...
-    ##  $ math_score: num  90.7 75.5 81.5 79.7 81.7 ...
+    ##  $ math_score: num  68.6 91.5 86.4 68.7 75.8 ...
 
 ADD INFORMATION HERE
 
@@ -84,9 +93,9 @@ We can then use the summary() function to view the results of the ANOVA.
 summary(model)
 ```
 
-    ##             Df Sum Sq Mean Sq F value   Pr(>F)    
-    ## grade        2   2928  1464.2   17.33 1.44e-05 ***
-    ## Residuals   27   2281    84.5                     
+    ##             Df Sum Sq Mean Sq F value  Pr(>F)   
+    ## grade        2   1086   542.9   5.716 0.00851 **
+    ## Residuals   27   2564    95.0                   
     ## ---
     ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
@@ -102,25 +111,6 @@ commonly used post-hoc test is the Tukey Honest Significant Differences
 (HSD) test.
 
 ``` r
-library(multcomp)
-```
-
-    ## Loading required package: mvtnorm
-
-    ## Loading required package: survival
-
-    ## Loading required package: TH.data
-
-    ## Loading required package: MASS
-
-    ## 
-    ## Attaching package: 'TH.data'
-
-    ## The following object is masked from 'package:MASS':
-    ## 
-    ##     geyser
-
-``` r
 tukey <- glht(model, linfct = mcp(grade = "Tukey"))
 summary(tukey)
 ```
@@ -134,10 +124,10 @@ summary(tukey)
     ## Fit: aov(formula = math_score ~ grade, data = data)
     ## 
     ## Linear Hypotheses:
-    ##                            Estimate Std. Error t value Pr(>|t|)    
-    ## 4th grade - 3rd grade == 0   -9.356      4.110  -2.276  0.07674 .  
-    ## 5th grade - 3rd grade == 0  -24.007      4.110  -5.841  < 0.001 ***
-    ## 5th grade - 4th grade == 0  -14.651      4.110  -3.564  0.00389 ** 
+    ##                            Estimate Std. Error t value Pr(>|t|)   
+    ## 4th grade - 3rd grade == 0  -10.547      4.358  -2.420  0.05680 . 
+    ## 5th grade - 3rd grade == 0  -14.186      4.358  -3.255  0.00818 **
+    ## 5th grade - 4th grade == 0   -3.639      4.358  -0.835  0.68486   
     ## ---
     ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
     ## (Adjusted p values reported -- single-step method)
@@ -180,17 +170,11 @@ boxplot of the `math_score` variable for each level of the `grade`
 variable.
 
 ``` r
-library(ggplot2)
-```
-
-    ## Warning: package 'ggplot2' was built under R version 4.2.2
-
-``` r
 ggplot(data, aes(x = grade, y = math_score)) + 
   geom_boxplot()
 ```
 
-![](index_files/figure-gfm/unnamed-chunk-6-1.png)<!-- -->
+![](anova_files/figure-gfm/unnamed-chunk-7-1.png)<!-- -->
 
 This plot shows the distribution of the `math_score` variable for each
 level of the `grade` variable, and can help to further illustrate the

@@ -27,7 +27,17 @@ For additional information, please follow the links below as necessary.
     .csv](https://stats.oarc.ucla.edu/stata/faq/how-do-i-export-stata-dta-files-to-comma-separated-files/)
 -   [Exporting Excel file to
     .csv](https://support.microsoft.com/en-us/office/import-or-export-text-txt-or-csv-files-5250ac4c-663c-47ce-937b-339e391393ba)
-    
+
+# Loading required packages
+
+```{r message=FALSE, warning=FALSE}
+
+library(multcomp)
+library(ggplot2)
+
+
+```
+
 
 # Data Preparation
 
@@ -82,7 +92,6 @@ After conducting the ANOVA, we can conduct post-hoc tests to determine which spe
 
 ```{r}
 
-library(multcomp)
 tukey <- glht(model, linfct = mcp(grade = "Tukey"))
 summary(tukey)
 
@@ -105,7 +114,6 @@ Finally, we can also create a plot to visualize the results of the ANOVA. In thi
 
 ```{r}
 
-library(ggplot2)
 ggplot(data, aes(x = grade, y = math_score)) + 
   geom_boxplot()
 
