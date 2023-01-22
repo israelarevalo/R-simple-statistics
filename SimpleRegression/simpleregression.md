@@ -14,8 +14,8 @@ Israel Arevalo
 
 Simple linear regression is a statistical method used to model the
 relationship between a single independent variable and a single
-dependent variable. In R, the lm() function can be used to fit a simple
-linear regression model. In this tutorial, we will use simulated
+dependent variable. In R, the `lm()` function can be used to fit a
+simple linear regression model. In this tutorial, we will use simulated
 educational data to demonstrate how to conduct a simple linear
 regression in R.
 
@@ -46,7 +46,7 @@ they study per week.
 
 ``` r
 # Loading Packages
-library(ggplot2)
+library(ggplot2) # ggplot2 is used to create the visualization in this tutorial
 ```
 
 ``` r
@@ -69,6 +69,40 @@ str(data)
     ##  $ student_id : int  1 2 3 4 5 6 7 8 9 10 ...
     ##  $ math_score : num  75 75.3 73 71 81.6 ...
     ##  $ study_hours: num  9.28 13.21 10.59 7.94 10.79 ...
+
+The `str()` function allows us to see what types of variables we are
+working with in our dataset. For this example, we can see that we have a
+`data.frame` that contains a total of 30 rows (observations) with 3
+columns (variables). Specifically, we have `student_id` (an integer type
+variable), `math_score` (a numeric variable), and `study_hours` (a
+numeric variable).
+
+If at this point you are wondering, what’s the difference between a
+numerical and integer variable? Don’t those two things represent the
+same thing? In R, there are a variety of data types and while this topic
+is outside of the scope of this tutorial, a brief explanation of these
+two data types is provided below.
+
+An integer data type can only represent whole numbers, such as 1, 2, 3,
+etc. It is stored in memory as a fixed number of bits, typically 4 bytes
+(32 bits) or 8 bytes (64 bits) depending on the system. This means that
+the maximum and minimum values of an integer are determined by the
+number of bits used to represent them.
+
+On the other hand, a numerical data type can represent both whole
+numbers and decimal numbers. The most common numerical data type in R is
+the double data type, which is a 64-bit floating-point number. This
+means that it can represent a much larger range of values than integers,
+but with less precision.
+
+In summary, integers are used to represent whole numbers while numerical
+data types are used to represent decimal numbers, and the main
+difference between them is the range of values that they can represent
+and the way they are stored in memory.
+
+Also, it’s worth mentioning that there’s a class in R called numeric
+which is a synonym for double, it’s the default class for representing
+numbers in R.
 
 # Conducting a Simple Linear Regression
 
@@ -135,7 +169,8 @@ and `0.02843` respectively) which is less than 0.05. This means that the
 intercept and the slope are statistically significant. This means that,
 the relationship between `math_score` and `study_hours` is strong enough
 to say that there is a real relationship between them with a high degree
-of confidence.
+of confidence. This can be further interpreted as for every 1 point of
+change in `study_hours`, there is a `-1.516` change in `math_score`.
 
 The next value is the R-squared value which represents the proportion of
 the variance in the dependent variable that is predictable from the
