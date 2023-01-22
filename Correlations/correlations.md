@@ -16,6 +16,24 @@ the `cor()` function can be used to calculate correlation coefficients.
 In this tutorial, we will use simulated educational data to demonstrate
 how to conduct correlations in R.
 
+As in previous guides, several assumptions about the user will be made.
+
+1.  You have installed R and an IDE such as RStudio on your computer
+2.  You have a dataset to work with (we will generate a dataset in this
+    tutorial but you will need a dataset to run your own analysis
+    outside of the tutorial, of course)
+
+For additional information, please follow the links below as necessary.
+
+- [Installing
+  RStudio](https://rstudio-education.github.io/hopr/starting.html)
+- [Exporting SPSS dataset to
+  .CSV](https://www.ibm.com/docs/en/spss-statistics/beta?topic=files-exporting-datasets)
+- [Exporting STATA dataset to
+  .csv](https://stats.oarc.ucla.edu/stata/faq/how-do-i-export-stata-dta-files-to-comma-separated-files/)
+- [Exporting Excel file to
+  .csv](https://support.microsoft.com/en-us/office/import-or-export-text-txt-or-csv-files-5250ac4c-663c-47ce-937b-339e391393ba)
+
 # Data Preparation
 
 First, we will need to load in the necessary packages and create the
@@ -23,10 +41,12 @@ simulated data set. For this tutorial, we will create a data set that
 contains information on students’ math scores and reading scores.
 
 ``` r
-set.seed(123)  # for reproducibility
-
-# Loading libraries
+# Loading Packages
 library(ggplot2)
+```
+
+``` r
+set.seed(123)  # for reproducibility
 
 # create the data set
 data <- data.frame(student_id = 1:30,
@@ -139,7 +159,7 @@ ggplot(data, aes(x = math_score, y = reading_score)) +
   ggtitle("Scatter plot of Math Scores vs Reading Scores")
 ```
 
-![](correlations_files/figure-gfm/unnamed-chunk-4-1.png)<!-- -->
+![](correlations_files/figure-gfm/unnamed-chunk-5-1.png)<!-- -->
 
 This plot shows the relationship between the `math_score` and
 `reading_score` variables, and can help to further illustrate the
