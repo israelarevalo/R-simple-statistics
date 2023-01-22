@@ -119,8 +119,6 @@ ggplot(data, aes(x = study_hours, y = math_score)) +
 
 ```
 
-
-
 This plot shows the relationship between the `math_score` and `study_hours` variables, and can help to further illustrate the strength and direction of the relationship modeled by the linear regression. The line of best fit (in red) shows the direction of the relationship and the slope of the line represents the strength of the relationship.
 
 In summary, this tutorial demonstrated how to conduct a simple linear regression using simulated educational data in R. The steps outlined in this tutorial can be applied to any data set and any set of variables. Simple linear regression is a useful tool for modeling the relationship between a single independent variable and a single dependent variable, and it can provide insights into the extent to which the independent variable is related to the dependent variable. Additionally, visualizing the results using the `ggplot2` package can help to further understand the relationship between the variables.
