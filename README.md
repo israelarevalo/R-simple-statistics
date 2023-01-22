@@ -13,4 +13,4 @@ Each tutorial is made using [Quarto](https://www.quarto.org) within [RStudio](ht
 2. [T-Tests](T-Tests/ttests.md)
 3. [Product-Moment Correlations](Correlations/correlations.md)
 4. [Analysis of Variance](ANOVA/anova.md)
-5. [Regressions - *in progress*]()
+5. [Simple Linear Regression](SimpleRegression/simpleregression.md)
