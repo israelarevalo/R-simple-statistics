@@ -37,6 +37,8 @@ First, we will need to load in the necessary packages and create the simulated d
 
 # Loading Packages
 library(ggplot2) # ggplot2 is used to create the visualization in this tutorial
+library(lm.beta)
+
 
 ```
 
@@ -92,6 +94,7 @@ We can use the `summary()` function to get a summary of the model and see the co
 
 summary(model)
 
+
 ```
 
 This output is showing the results of a simple linear regression analysis, which is a statistical method used to model the relationship between a single independent variable `study_hours` and a single dependent variable `math_score`.
@@ -100,9 +103,9 @@ The first part of the output shows the residuals. Residuals are the differences 
 
 The second part of the output shows the coefficients of the model, including the intercept (the value of the dependent variable when the independent variable is 0) and the slope (the change in the dependent variable for a one-unit change in the independent variable). The estimate column shows the value of the coefficient, the Std. Error column shows the standard error of the estimate, the t value column shows the t-value, and the Pr(>|t|) column shows the p-value.
 
-The p-value for the intercept and the slope is very small (`2.45e-13` and `0.02843` respectively) which is less than 0.05. This means that the intercept and the slope are statistically significant. This means that, the relationship between `math_score` and `study_hours` is strong enough to say that there is a real relationship between them with a high degree of confidence. This can be further interpreted as for every 1 point of change in `study_hours`, there is a `-1.516` change in `math_score`.
+The p-value for the intercept and the slope is very small (`2.45e-13` and `0.02843` respectively) which is less than 0.05. This means that the intercept and the slope are statistically significant. This means that, the relationship between `math_score` and `study_hours` is strong enough to say that there is a real relationship between them with a high degree of confidence. This can be further interpreted as for every 1 unit change in `study_hours`, there is a `-1.516` unit change in `math_score`.
 
-The next value is the R-squared value which represents the proportion of the variance in the dependent variable that is predictable from the independent variable. In this case, the R-squared value is `0.1601`, which is quite high, which means that the relationship between the two variables is strong. 
+The next value is the R-squared value which represents the proportion of the variance in the dependent variable that is predictable from the independent variable. In this case, the R-squared value is `0.1601` and can be interpreted as 16% of the variance in `math_score` is accounted for by `study_hours`. 
 
 Overall, the results show that the slope `study_hours` is statistically significant, this means that the number of hours studied per week is strongly related to the `math scores`. Therefore, the relationship between the two variables is strong and it is possible to make **predictions** about math scores based on the number of hours studied per week.
 

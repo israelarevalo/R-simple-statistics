@@ -1,7 +1,7 @@
 Conducting Simple Linear Regressions in R
 ================
 Israel Arevalo
-2023-01-22
+2023-01-24
 
 - <a href="#data-preparation" id="toc-data-preparation">Data
   Preparation</a>
@@ -47,6 +47,7 @@ they study per week.
 ``` r
 # Loading Packages
 library(ggplot2) # ggplot2 is used to create the visualization in this tutorial
+library(lm.beta)
 ```
 
 ``` r
@@ -169,14 +170,15 @@ and `0.02843` respectively) which is less than 0.05. This means that the
 intercept and the slope are statistically significant. This means that,
 the relationship between `math_score` and `study_hours` is strong enough
 to say that there is a real relationship between them with a high degree
-of confidence. This can be further interpreted as for every 1 point of
-change in `study_hours`, there is a `-1.516` change in `math_score`.
+of confidence. This can be further interpreted as for every 1 unit
+change in `study_hours`, there is a `-1.516` unit change in
+`math_score`.
 
 The next value is the R-squared value which represents the proportion of
 the variance in the dependent variable that is predictable from the
-independent variable. In this case, the R-squared value is `0.1601`,
-which is quite high, which means that the relationship between the two
-variables is strong.
+independent variable. In this case, the R-squared value is `0.1601` and
+can be interpreted as 16% of the variance in `math_score` is accounted
+for by `study_hours`.
 
 Overall, the results show that the slope `study_hours` is statistically
 significant, this means that the number of hours studied per week is
