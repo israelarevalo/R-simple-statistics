@@ -1,7 +1,7 @@
 Conducting Analysis of Variance in R
 ================
 Israel Arevalo
-2023-01-22
+2023-01-31
 
 - <a href="#loading-required-packages"
   id="toc-loading-required-packages">Loading required packages</a>
@@ -56,6 +56,8 @@ information on students’ math scores and the grade level they are in (A,
 B, or C).
 
 ``` r
+set.seed(123)
+
 data <- data.frame(student_id = 1:30,
                    grade = c(rep("3rd grade", 10), rep("4th grade", 10), rep("5th grade", 10)),
                    math_score = c(rnorm(10, mean = 80, sd = 10),
@@ -73,7 +75,7 @@ str(data)
     ## 'data.frame':    30 obs. of  3 variables:
     ##  $ student_id: int  1 2 3 4 5 6 7 8 9 10 ...
     ##  $ grade     : chr  "3rd grade" "3rd grade" "3rd grade" "3rd grade" ...
-    ##  $ math_score: num  81.7 87 67 69.8 78.4 ...
+    ##  $ math_score: num  74.4 77.7 95.6 80.7 81.3 ...
 
 ADD INFORMATION HERE
 
@@ -95,9 +97,9 @@ We can then use the summary() function to view the results of the ANOVA.
 summary(model)
 ```
 
-    ##             Df Sum Sq Mean Sq F value Pr(>F)   
-    ## grade        2   1065   532.5   5.822 0.0079 **
-    ## Residuals   27   2469    91.5                  
+    ##             Df Sum Sq Mean Sq F value   Pr(>F)    
+    ## grade        2   3221  1610.5   16.93 1.72e-05 ***
+    ## Residuals   27   2568    95.1                     
     ## ---
     ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
@@ -126,10 +128,10 @@ summary(tukey)
     ## Fit: aov(formula = math_score ~ grade, data = data)
     ## 
     ## Linear Hypotheses:
-    ##                            Estimate Std. Error t value Pr(>|t|)   
-    ## 4th grade - 3rd grade == 0   -5.286      4.277  -1.236  0.44293   
-    ## 5th grade - 3rd grade == 0  -14.424      4.277  -3.373  0.00618 **
-    ## 5th grade - 4th grade == 0   -9.138      4.277  -2.137  0.10116   
+    ##                            Estimate Std. Error t value Pr(>|t|)    
+    ## 4th grade - 3rd grade == 0   -8.660      4.362  -1.985  0.13517    
+    ## 5th grade - 3rd grade == 0  -24.992      4.362  -5.730  < 0.001 ***
+    ## 5th grade - 4th grade == 0  -16.332      4.362  -3.744  0.00244 ** 
     ## ---
     ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
     ## (Adjusted p values reported -- single-step method)
@@ -147,17 +149,17 @@ the difference is not statistically significant.
 
 For example, the first row shows the comparison between the mean of the
 4th grade and the mean of the 3rd grade. The estimated difference in
-means is -6.583, with a p-value of 0.35919, which is greater than 0.05.
-This means that there is not a statistically significant difference
-between the mean math score of 4th grade and the mean math score of 3rd
-grade.
+means is `-8.660`, with a p-value of `0.13517`, which is greater than
+0.05. This means that there is not a statistically significant
+difference between the mean math score of 4th grade and the mean math
+score of 3rd grade.
 
-On the other hand, the second row shows the comparison between the mean
-of the 5th grade and the mean of the 3rd grade. The estimated difference
-in means is -17.372, with a p-value of 0.00288, which is less than 0.05.
-This means that there is a statistically significant difference between
-the mean math score of 5th grade and the mean math score of 3rd grade,
-and the 5th graders have a lower math score than the 3rd graders.
+On the other hand, the third row shows the comparison between the mean
+of the 5th grade and the mean of the 4th grade. The estimated difference
+in means is `-16.332`, with a p-value of `0.00244`, which is less than
+0.05. This means that there is a statistically significant difference
+between the mean math score of 5th grade and the mean math score of 4th
+grade, and the 5th graders have a lower math score than the 4th graders.
 
 This output shows the results of a statistical test that compares the
 mean math score of different grade levels (3rd, 4th and 5th), and gives

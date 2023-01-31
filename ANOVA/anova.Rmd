@@ -44,6 +44,7 @@ library(ggplot2)
 First, we will need to load in the necessary packages and the data set. For this tutorial, we will use a hypothetical data set that contains information on students' math scores and the grade level they are in (A, B, or C).
 
 ```{r}
+set.seed(123)
 
 data <- data.frame(student_id = 1:30,
                    grade = c(rep("3rd grade", 10), rep("4th grade", 10), rep("5th grade", 10)),
@@ -101,9 +102,9 @@ The output will show the p-values and group comparisons for the Tukey HSD test.
 
 The table shows the estimated difference in means between each pair of groups, and the corresponding standard error, t-value, and p-value. The p-values are used to determine whether the differences between the means are statistically significant. A p-value of less than 0.05 (indicated by **) means that the difference is statistically significant, while a p-value of greater than 0.05 (indicated by . or no symbol) means that the difference is not statistically significant.
 
-For example, the first row shows the comparison between the mean of the 4th grade and the mean of the 3rd grade. The estimated difference in means is -6.583, with a p-value of 0.35919, which is greater than 0.05. This means that there is not a statistically significant difference between the mean math score of 4th grade and the mean math score of 3rd grade.
+For example, the first row shows the comparison between the mean of the 4th grade and the mean of the 3rd grade. The estimated difference in means is `-8.660`, with a p-value of `0.13517`, which is greater than 0.05. This means that there is not a statistically significant difference between the mean math score of 4th grade and the mean math score of 3rd grade.
 
-On the other hand, the second row shows the comparison between the mean of the 5th grade and the mean of the 3rd grade. The estimated difference in means is -17.372, with a p-value of 0.00288, which is less than 0.05. This means that there is a statistically significant difference between the mean math score of 5th grade and the mean math score of 3rd grade, and the 5th graders have a lower math score than the 3rd graders.
+On the other hand, the third row shows the comparison between the mean of the 5th grade and the mean of the 4th grade. The estimated difference in means is `-16.332`, with a p-value of `0.00244`, which is less than 0.05. This means that there is a statistically significant difference between the mean math score of 5th grade and the mean math score of 4th grade, and the 5th graders have a lower math score than the 4th graders.
 
 This output shows the results of a statistical test that compares the mean math score of different grade levels (3rd, 4th and 5th), and gives an indication of whether the difference in mean math scores between any two grade levels is statistically significant or not.
 
