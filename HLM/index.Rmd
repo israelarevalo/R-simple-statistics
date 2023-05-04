@@ -40,24 +40,27 @@ Using randomly-generated data, let's build a fictitious dataset to math the scen
 
 This step is only required for the instructional nature of this tutorial. You will **not** need to run this step as you do not need to randomly generate your data. Unless you do... in which case, have at it!
 
-In the code block below, we will generate a dataframe consisting of math scores from students nested within classrooms who received an intervention of some kind and their respective SES. The purpose of this example is to determine whether the intervention had an effect on math scores, while controlling for SES, and taking into account the nested structure of the data.
+In the code block below, we will generate a dataframe consisting of math scores from students nested within classrooms and their respective SES. The purpose of this example is to determine whether SES had an effect on math scores while taking into account the nested structure of the data.
 
 ```{r message=FALSE, warning=FALSE}
 
 # Generate sample data
-set.seed(123)
+set.seed(1342)
 n_classrooms <- 12
 n_students <- 10
-math_score_ctrl <- rnorm(n_classrooms*n_students, mean = 50, sd = 10)
-math_score_trt <- rnorm(n_classrooms*n_students, mean = 55, sd = 7) # higher mean and smaller SD
+classroom_means_math <- rnorm(n_classrooms, mean = 50, sd = 5) # random means for each classroom in math scores
+classroom_means_ses <- rnorm(n_classrooms, mean = 50, sd = 10) # random means for each classroom in SES
+math_score_ctrl <- rnorm(n_classrooms*n_students, mean = rep(classroom_means_math, each = n_students), sd = 10)
+math_score_trt <- rnorm(n_classrooms*n_students, mean = rep(classroom_means_math, each = n_students) + 3, sd = 7) # higher mean and smaller SD
 math_score <- c(math_score_ctrl, math_score_trt)
-ses <- c(rnorm(n_classrooms*n_students, mean = 50, sd = 10))
-intervention <- rep(c(0,1), each = n_classrooms*n_students/2)
+ses_ctrl <- rnorm(n_classrooms*n_students, mean = rep(classroom_means_ses, each = n_students), sd = 10)
+ses_trt <- rnorm(n_classrooms*n_students, mean = rep(classroom_means_ses, each = n_students) + 5, sd = 5) # higher mean and smaller SD
+ses <- c(ses_ctrl, ses_trt)
 classroom_id <- rep(1:n_classrooms, each = n_students*2)
 student_id <- rep(1:(n_students*2), times = n_classrooms)
 
 # Create data frame
-data <- data.frame(math_score, intervention, classroom_id, student_id, ses)
+data <- data.frame(math_score, classroom_id, student_id, ses)
 
 # Show first few rows
 head(data)
@@ -65,14 +68,14 @@ head(data)
 
 ## Exploring our Data
 
-Let's take a look at simple descriptive statisitcs within our data. Running the base (summary) command allows us to look at information such as the minimum, maximum, quartiles, median, and means for each variable within our dataset. You can further customize this command by adding further adjustments to the command itself. For example, if we want to run5 a summary command on just 1 or 2 variables within a dataset containing many other variables, we can adjust our code to specify which variables we are interested in by adding a `$` symbol after the name of the dataset and then specifying the name of the variable  (i.e., `summary(df$intervention`). Below we have run a simple `summary` command to explore our generated dataset. Since we only generated two variables, we do not need to specify which variables we are interested in. 
+Let's take a look at simple descriptive statisitcs within our data. Running the base (summary) command allows us to look at information such as the minimum, maximum, quartiles, median, and means for each variable within our dataset. You can further customize this command by adding further adjustments to the command itself. For example, if we want to run5 a summary command on just 1 or 2 variables within a dataset containing many other variables, we can adjust our code to specify which variables we are interested in by adding a `$` symbol after the name of the dataset and then specifying the name of the variable  (i.e., `summary(df$ses`). Below we have run a simple `summary` command to explore our generated dataset. Since we only generated two variables, we do not need to specify which variables we are interested in. 
 
 ```{r message=FALSE, warning=FALSE}
 
 summary(data)
 ```
 
-Some summary information may not be necessarily useful (e.g., classroom_id and student_id). When analyzing nested data, we can leverage the `dplyr` package to group students by classroom and then calculate descriptive data. The `dplyr` package is a powerful tool that allows us to conduct data wrangling (cleaning) and analysis. In the code block below, we will use the `dplyr` package to group our students by classroom and then calculate the number of students per classroom and the mean and standard deviation of their math scores. Additionally, we will use the `describeBy` function from the `psych` package to calculate descriptive statistics for each intervention group.
+Some summary information may not be necessarily useful (e.g., classroom_id and student_id). When analyzing nested data, we can leverage the `dplyr` package to group students by classroom and then calculate descriptive data. The `dplyr` package is a powerful tool that allows us to conduct data wrangling (cleaning) and analysis. In the code block below, we will use the `dplyr` package to group our students by classroom and then calculate the number of students per classroom and the mean and standard deviation of their math scores. Additionally, we will use the `describeBy` function from the `psych` package to calculate descriptive statistics for each classroom.
 
 ```{r message=FALSE, warning=FALSE}
 
@@ -98,7 +101,7 @@ data %>%
 
 Great! It looks like we have 10 students per classroom and their mean math scores range between 45 and 55. Also, thanks to the `psych` package, we get detailed group-level descriptive statistics for each classroom.
 
-Let's visualize this information using a histogram. To do this, we can use the `ggplot2` package. This package allows us to create beautiful and informative data visualizations. In the code block below, we will use the `ggplot2` package to create a histogram of our math scores. Also, let's bring in the `facet_wrap` function to create a histogram for each intervention group.
+Let's visualize this information using a histogram. To do this, we can use the `ggplot2` package. This package allows us to create beautiful and informative data visualizations. In the code block below, we will use the `ggplot2` package to create a histogram of our math scores. Also, let's bring in the `facet_wrap` function to create a histogram for each classroom.
 
 ```{r message=FALSE, warning=FALSE}
 
@@ -108,10 +111,10 @@ library(ggplot2)
 # Plot histogram
 ggplot(data, aes(x = math_score)) +
   geom_histogram(binwidth = 5) +
-  facet_wrap(~intervention)
+  facet_wrap(~classroom_id)
 ```
 
-This histogram shows us that the math scores for both intervention groups are normally distributed. However, the mean math score for the intervention group is slightly higher than the control group. 
+This histogram shows us the distribution of math scores across all classrooms. For the most part, all classroom scores appear to be normally distributed.
 
 ## Centering our Data
 
@@ -168,15 +171,21 @@ summary(null_model)
 
 In this model, we are predicting math scores using a random intercept for classroom. The random intercept for classroom is represented by `(1 | classroom_id)`. The `1` represents the intercept and the `classroom_id` represents the groups.
 
-Now, let's run our full model. We want to see if the intervention has an effect on math scores while controlling for SES. We also want to see if the intervention has a different effect on math scores for students with low SES compared to students with high SES. We will allow the intervention vary across classrooms.
+Now, let's run our full model. We want to see if SES has an effect on student math scores. We are also adding an interaction effect between student level SES and classroom level SES to investigate how the classroom makeup may impact student performance.
 
 ### Full Model
 ```{r message=FALSE, warning=FALSE}
 
 # Run full model
-full_model <- lmer(math_score ~ intervention + ses + intervention*ses + (1 + intervention | classroom_id), data = data)
+full_model <- lmer(math_score ~  ses_mc + ses_gmc + ses_mc:ses_gmc + (1 + ses_mc | classroom_id), data = data)
 summary(full_model)
 ```
 
-In this model, we are predicting math scores using intervention, SES, and the interaction between intervention and SES. We are also allowing the intercept and intervention to vary across classrooms. The random intercept and intervention for classroom is represented by `(1 + intervention | classroom_id)`. 
+In this model, we are predicting math scores using ses_mc, ses_gmc, and the interaction between these two variables. We are also allowing the intercept and ses_mc to vary across classrooms. The random intercept and ses_mc for classroom is represented by `(1 + ses_mc | classroom_id)`. 
 
+The summary output provides estimates for the fixed and random effects produced by the model. 
+
+
+## Summary
+
+In conclusion, this tutorial provides an introduction to mixed effects models (HLM) and explains how they can be used to analyze educational research data that exhibit a nested or hierarchical structure. By taking into account the nested structure of the data and allowing for the estimation of both fixed and random effects, mixed effects models can improve the accuracy of the estimates, increase statistical power, and provide a more comprehensive understanding of the underlying processes. The tutorial uses the R programming language and the `lme4` package to illustrate the basics of mixed effects modeling. It also provides step-by-step instructions exploring the data using descriptive statistics. Future tutorials include the use of mixed effects/HLM approaches using longitiduinal data. 

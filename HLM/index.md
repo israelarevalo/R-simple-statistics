@@ -64,39 +64,40 @@ tutorial. You will **not** need to run this step as you do not need to
 randomly generate your data. Unless you do… in which case, have at it!
 
 In the code block below, we will generate a dataframe consisting of math
-scores from students nested within classrooms who received an
-intervention of some kind and their respective SES. The purpose of this
-example is to determine whether the intervention had an effect on math
-scores, while controlling for SES, and taking into account the nested
-structure of the data.
+scores from students nested within classrooms and their respective SES.
+The purpose of this example is to determine whether SES had an effect on
+math scores while taking into account the nested structure of the data.
 
 ``` r
 # Generate sample data
-set.seed(123)
+set.seed(1342)
 n_classrooms <- 12
 n_students <- 10
-math_score_ctrl <- rnorm(n_classrooms*n_students, mean = 50, sd = 10)
-math_score_trt <- rnorm(n_classrooms*n_students, mean = 55, sd = 7) # higher mean and smaller SD
+classroom_means_math <- rnorm(n_classrooms, mean = 50, sd = 5) # random means for each classroom in math scores
+classroom_means_ses <- rnorm(n_classrooms, mean = 50, sd = 10) # random means for each classroom in SES
+math_score_ctrl <- rnorm(n_classrooms*n_students, mean = rep(classroom_means_math, each = n_students), sd = 10)
+math_score_trt <- rnorm(n_classrooms*n_students, mean = rep(classroom_means_math, each = n_students) + 3, sd = 7) # higher mean and smaller SD
 math_score <- c(math_score_ctrl, math_score_trt)
-ses <- c(rnorm(n_classrooms*n_students, mean = 50, sd = 10))
-intervention <- rep(c(0,1), each = n_classrooms*n_students/2)
+ses_ctrl <- rnorm(n_classrooms*n_students, mean = rep(classroom_means_ses, each = n_students), sd = 10)
+ses_trt <- rnorm(n_classrooms*n_students, mean = rep(classroom_means_ses, each = n_students) + 5, sd = 5) # higher mean and smaller SD
+ses <- c(ses_ctrl, ses_trt)
 classroom_id <- rep(1:n_classrooms, each = n_students*2)
 student_id <- rep(1:(n_students*2), times = n_classrooms)
 
 # Create data frame
-data <- data.frame(math_score, intervention, classroom_id, student_id, ses)
+data <- data.frame(math_score, classroom_id, student_id, ses)
 
 # Show first few rows
 head(data)
 ```
 
-    ##   math_score intervention classroom_id student_id      ses
-    ## 1   44.39524            0            1          1 42.11378
-    ## 2   47.69823            0            1          2 44.97801
-    ## 3   65.58708            0            1          3 64.96061
-    ## 4   50.70508            0            1          4 38.62696
-    ## 5   51.29288            0            1          5 48.20948
-    ## 6   67.15065            0            1          6 69.02362
+    ##   math_score classroom_id student_id      ses
+    ## 1   55.99384            1          1 59.01612
+    ## 2   38.87901            1          2 59.39918
+    ## 3   53.33559            1          3 53.32749
+    ## 4   67.59600            1          4 63.88191
+    ## 5   35.90531            1          5 51.18091
+    ## 6   52.84618            1          6 63.36392
 
 ## Exploring our Data
 
@@ -109,21 +110,21 @@ run5 a summary command on just 1 or 2 variables within a dataset
 containing many other variables, we can adjust our code to specify which
 variables we are interested in by adding a `$` symbol after the name of
 the dataset and then specifying the name of the variable (i.e.,
-`summary(df$intervention`). Below we have run a simple `summary` command
-to explore our generated dataset. Since we only generated two variables,
-we do not need to specify which variables we are interested in.
+`summary(df$ses`). Below we have run a simple `summary` command to
+explore our generated dataset. Since we only generated two variables, we
+do not need to specify which variables we are interested in.
 
 ``` r
 summary(data)
 ```
 
-    ##    math_score     intervention  classroom_id     student_id         ses       
-    ##  Min.   :26.91   Min.   :0.0   Min.   : 1.00   Min.   : 1.00   Min.   :25.34  
-    ##  1st Qu.:46.89   1st Qu.:0.0   1st Qu.: 3.75   1st Qu.: 5.75   1st Qu.:44.67  
-    ##  Median :52.27   Median :0.5   Median : 6.50   Median :10.50   Median :50.61  
-    ##  Mean   :52.49   Mean   :0.5   Mean   : 6.50   Mean   :10.50   Mean   :50.86  
-    ##  3rd Qu.:57.83   3rd Qu.:1.0   3rd Qu.: 9.25   3rd Qu.:15.25   3rd Qu.:58.46  
-    ##  Max.   :77.69   Max.   :1.0   Max.   :12.00   Max.   :20.00   Max.   :75.71
+    ##    math_score     classroom_id     student_id         ses       
+    ##  Min.   :20.82   Min.   : 1.00   Min.   : 1.00   Min.   :23.27  
+    ##  1st Qu.:41.00   1st Qu.: 3.75   1st Qu.: 5.75   1st Qu.:50.93  
+    ##  Median :49.58   Median : 6.50   Median :10.50   Median :58.34  
+    ##  Mean   :49.41   Mean   : 6.50   Mean   :10.50   Mean   :57.87  
+    ##  3rd Qu.:56.97   3rd Qu.: 9.25   3rd Qu.:15.25   3rd Qu.:65.21  
+    ##  Max.   :74.32   Max.   :12.00   Max.   :20.00   Max.   :86.27
 
 Some summary information may not be necessarily useful (e.g.,
 classroom_id and student_id). When analyzing nested data, we can
@@ -134,7 +135,7 @@ block below, we will use the `dplyr` package to group our students by
 classroom and then calculate the number of students per classroom and
 the mean and standard deviation of their math scores. Additionally, we
 will use the `describeBy` function from the `psych` package to calculate
-descriptive statistics for each intervention group.
+descriptive statistics for each classroom.
 
 ``` r
 # Load dplyr and psych package
@@ -175,18 +176,18 @@ data %>%
     ## # A tibble: 12 × 3
     ##    classroom_id  mean    sd
     ##           <int> <dbl> <dbl>
-    ##  1            1  51.4  9.73
-    ##  2            2  49.5  8.30
-    ##  3            3  51.1  9.57
-    ##  4            4  48.8  9.73
-    ##  5            5  53.8  8.29
-    ##  6            6  46.4  7.01
-    ##  7            7  54.7  7.60
-    ##  8            8  53.8  7.22
-    ##  9            9  56.2  7.51
-    ## 10           10  54.1  6.38
-    ## 11           11  55.4  7.27
-    ## 12           12  54.7  5.74
+    ##  1            1  54.7  8.58
+    ##  2            2  41.8 10.4 
+    ##  3            3  46.1 10.2 
+    ##  4            4  53.1  8.70
+    ##  5            5  46.4 13.6 
+    ##  6            6  47.2 13.5 
+    ##  7            7  57.1  6.75
+    ##  8            8  44.0  7.56
+    ##  9            9  51.2  7.26
+    ## 10           10  51.5  8.24
+    ## 11           11  51.5  9.58
+    ## 12           12  48.1 11.5
 
 ``` r
 data %>%
@@ -197,171 +198,147 @@ data %>%
     ##  Descriptive statistics by group 
     ## classroom_id: 1
     ##              vars  n  mean   sd median trimmed  mad   min   max range  skew
-    ## math_score      1 20 51.42 9.73  51.20   51.60 8.70 30.33 67.87 37.54 -0.06
-    ## intervention    2 20  0.00 0.00   0.00    0.00 0.00  0.00  0.00  0.00   NaN
-    ## classroom_id    3 20  1.00 0.00   1.00    1.00 0.00  1.00  1.00  0.00   NaN
-    ## student_id      4 20 10.50 5.92  10.50   10.50 7.41  1.00 20.00 19.00  0.00
-    ## ses             5 20 49.77 9.64  48.54   49.33 8.53 34.67 69.02 34.35  0.47
+    ## math_score      1 20 54.75 8.58  54.74   55.41 8.09 35.91 67.60 31.69 -0.60
+    ## classroom_id    2 20  1.00 0.00   1.00    1.00 0.00  1.00  1.00  0.00   NaN
+    ## student_id      3 20 10.50 5.92  10.50   10.50 7.41  1.00 20.00 19.00  0.00
+    ## ses             4 20 54.70 7.53  54.22   55.07 8.45 39.52 64.79 25.27 -0.19
     ##              kurtosis   se
-    ## math_score      -0.55 2.17
-    ## intervention      NaN 0.00
+    ## math_score      -0.46 1.92
     ## classroom_id      NaN 0.00
     ## student_id      -1.38 1.32
-    ## ses             -0.78 2.16
+    ## ses             -1.17 1.68
     ## ------------------------------------------------------------ 
     ## classroom_id: 2
-    ##              vars  n  mean   sd median trimmed   mad   min   max range  skew
-    ## math_score      1 20 49.49 8.30  48.60   49.78 11.29 33.13 62.54 29.41 -0.19
-    ## intervention    2 20  0.00 0.00   0.00    0.00  0.00  0.00  0.00  0.00   NaN
-    ## classroom_id    3 20  2.00 0.00   2.00    2.00  0.00  2.00  2.00  0.00   NaN
-    ## student_id      4 20 10.50 5.92  10.50   10.50  7.41  1.00 20.00 19.00  0.00
-    ## ses             5 20 52.09 9.58  50.82   52.19  8.70 32.43 72.93 40.50  0.04
+    ##              vars  n  mean    sd median trimmed   mad   min   max range  skew
+    ## math_score      1 20 41.84 10.41  43.45   42.01 10.59 20.82 61.77 40.94 -0.15
+    ## classroom_id    2 20  2.00  0.00   2.00    2.00  0.00  2.00  2.00  0.00   NaN
+    ## student_id      3 20 10.50  5.92  10.50   10.50  7.41  1.00 20.00 19.00  0.00
+    ## ses             4 20 54.47 14.42  49.96   54.82 13.74 23.27 76.94 53.68 -0.11
     ##              kurtosis   se
-    ## math_score      -1.21 1.86
-    ## intervention      NaN 0.00
+    ## math_score      -0.80 2.33
     ## classroom_id      NaN 0.00
     ## student_id      -1.38 1.32
-    ## ses             -0.23 2.14
+    ## ses             -1.01 3.23
     ## ------------------------------------------------------------ 
     ## classroom_id: 3
-    ##              vars  n  mean   sd median trimmed  mad   min   max range  skew
-    ## math_score      1 20 51.06 9.57  49.64   50.79 7.79 34.51 71.69 37.18  0.31
-    ## intervention    2 20  0.00 0.00   0.00    0.00 0.00  0.00  0.00  0.00   NaN
-    ## classroom_id    3 20  3.00 0.00   3.00    3.00 0.00  3.00  3.00  0.00   NaN
-    ## student_id      4 20 10.50 5.92  10.50   10.50 7.41  1.00 20.00 19.00  0.00
-    ## ses             5 20 53.95 9.81  51.95   54.40 9.74 33.33 70.02 36.70 -0.24
+    ##              vars  n  mean    sd median trimmed   mad   min   max range  skew
+    ## math_score      1 20 46.10 10.23  44.02   45.68 10.38 30.16 64.99 34.83  0.34
+    ## classroom_id    2 20  3.00  0.00   3.00    3.00  0.00  3.00  3.00  0.00   NaN
+    ## student_id      3 20 10.50  5.92  10.50   10.50  7.41  1.00 20.00 19.00  0.00
+    ## ses             4 20 57.27 11.05  60.35   58.07 11.46 34.90 73.12 38.22 -0.44
     ##              kurtosis   se
-    ## math_score      -0.60 2.14
-    ## intervention      NaN 0.00
+    ## math_score      -1.18 2.29
     ## classroom_id      NaN 0.00
     ## student_id      -1.38 1.32
-    ## ses             -0.63 2.19
+    ## ses             -0.96 2.47
     ## ------------------------------------------------------------ 
     ## classroom_id: 4
     ##              vars  n  mean    sd median trimmed   mad   min   max range skew
-    ## math_score      1 20 48.80  9.73  47.88   48.78  8.20 26.91 70.50 43.59 0.04
-    ## intervention    2 20  1.00  0.00   1.00    1.00  0.00  1.00  1.00  0.00  NaN
-    ## classroom_id    3 20  4.00  0.00   4.00    4.00  0.00  4.00  4.00  0.00  NaN
-    ## student_id      4 20 10.50  5.92  10.50   10.50  7.41  1.00 20.00 19.00 0.00
-    ## ses             5 20 49.61 11.38  47.71   49.52 13.02 29.86 70.38 40.52 0.11
+    ## math_score      1 20 53.15  8.70  52.86   52.90  7.78 36.54 73.12 36.58 0.34
+    ## classroom_id    2 20  4.00  0.00   4.00    4.00  0.00  4.00  4.00  0.00  NaN
+    ## student_id      3 20 10.50  5.92  10.50   10.50  7.41  1.00 20.00 19.00 0.00
+    ## ses             4 20 47.57 13.25  48.13   46.92 12.64 24.07 73.70 49.63 0.21
     ##              kurtosis   se
-    ## math_score      -0.04 2.18
-    ## intervention      NaN 0.00
+    ## math_score      -0.26 1.94
     ## classroom_id      NaN 0.00
     ## student_id      -1.38 1.32
-    ## ses             -1.13 2.54
+    ## ses             -0.84 2.96
     ## ------------------------------------------------------------ 
     ## classroom_id: 5
-    ##              vars  n  mean   sd median trimmed   mad   min   max range  skew
-    ## math_score      1 20 53.75 8.29  53.59   53.40  9.78 39.74 71.87 32.14  0.32
-    ## intervention    2 20  1.00 0.00   1.00    1.00  0.00  1.00  1.00  0.00   NaN
-    ## classroom_id    3 20  5.00 0.00   5.00    5.00  0.00  5.00  5.00  0.00   NaN
-    ## student_id      4 20 10.50 5.92  10.50   10.50  7.41  1.00 20.00 19.00  0.00
-    ## ses             5 20 50.50 9.98  51.22   50.98 10.29 29.48 65.19 35.71 -0.42
+    ##              vars  n  mean    sd median trimmed   mad   min   max range skew
+    ## math_score      1 20 46.44 13.61  43.68   45.86 15.82 24.08 71.83 47.75 0.25
+    ## classroom_id    2 20  5.00  0.00   5.00    5.00  0.00  5.00  5.00  0.00  NaN
+    ## student_id      3 20 10.50  5.92  10.50   10.50  7.41  1.00 20.00 19.00 0.00
+    ## ses             4 20 62.54 10.34  61.80   62.21 11.97 47.19 86.27 39.08 0.35
     ##              kurtosis   se
-    ## math_score      -0.79 1.85
-    ## intervention      NaN 0.00
+    ## math_score      -0.99 3.04
     ## classroom_id      NaN 0.00
     ## student_id      -1.38 1.32
-    ## ses             -0.93 2.23
+    ## ses             -0.82 2.31
     ## ------------------------------------------------------------ 
     ## classroom_id: 6
-    ##              vars  n  mean    sd median trimmed  mad   min   max range  skew
-    ## math_score      1 20 46.41  7.01  46.36   46.61 7.08 33.32 59.19 25.87 -0.09
-    ## intervention    2 20  1.00  0.00   1.00    1.00 0.00  1.00  1.00  0.00   NaN
-    ## classroom_id    3 20  6.00  0.00   6.00    6.00 0.00  6.00  6.00  0.00   NaN
-    ## student_id      4 20 10.50  5.92  10.50   10.50 7.41  1.00 20.00 19.00  0.00
-    ## ses             5 20 49.26 12.00  50.11   49.21 8.87 25.34 75.71 50.37  0.00
+    ##              vars  n  mean    sd median trimmed   mad   min   max range skew
+    ## math_score      1 20 47.17 13.55  46.24   46.79 14.99 25.61 74.32 48.71 0.18
+    ## classroom_id    2 20  6.00  0.00   6.00    6.00  0.00  6.00  6.00  0.00  NaN
+    ## student_id      3 20 10.50  5.92  10.50   10.50  7.41  1.00 20.00 19.00 0.00
+    ## ses             4 20 53.56 12.01  52.85   53.53  9.33 31.63 77.36 45.72 0.07
     ##              kurtosis   se
-    ## math_score      -0.84 1.57
-    ## intervention      NaN 0.00
+    ## math_score      -0.97 3.03
     ## classroom_id      NaN 0.00
     ## student_id      -1.38 1.32
-    ## ses             -0.19 2.68
+    ## ses             -0.64 2.69
     ## ------------------------------------------------------------ 
     ## classroom_id: 7
-    ##              vars  n  mean   sd median trimmed  mad   min   max range skew
-    ## math_score      1 20 54.73 7.60  54.89   54.56 7.22 40.63 68.36 27.74 0.15
-    ## intervention    2 20  0.00 0.00   0.00    0.00 0.00  0.00  0.00  0.00  NaN
-    ## classroom_id    3 20  7.00 0.00   7.00    7.00 0.00  7.00  7.00  0.00  NaN
-    ## student_id      4 20 10.50 5.92  10.50   10.50 7.41  1.00 20.00 19.00 0.00
-    ## ses             5 20 49.77 9.64  48.54   49.33 8.53 34.67 69.02 34.35 0.47
+    ##              vars  n  mean   sd median trimmed  mad   min   max range  skew
+    ## math_score      1 20 57.13 6.75  57.43   56.56 6.86 47.15 72.50 25.35  0.52
+    ## classroom_id    2 20  7.00 0.00   7.00    7.00 0.00  7.00  7.00  0.00   NaN
+    ## student_id      3 20 10.50 5.92  10.50   10.50 7.41  1.00 20.00 19.00  0.00
+    ## ses             4 20 62.10 5.62  61.00   62.27 5.60 51.35 72.38 21.03 -0.10
     ##              kurtosis   se
-    ## math_score      -0.83 1.70
-    ## intervention      NaN 0.00
+    ## math_score      -0.43 1.51
     ## classroom_id      NaN 0.00
     ## student_id      -1.38 1.32
-    ## ses             -0.78 2.16
+    ## ses             -0.74 1.26
     ## ------------------------------------------------------------ 
     ## classroom_id: 8
-    ##              vars  n  mean   sd median trimmed   mad   min   max range skew
-    ## math_score      1 20 53.79 7.22  53.10   53.53 10.03 43.79 69.70 25.91 0.21
-    ## intervention    2 20  0.00 0.00   0.00    0.00  0.00  0.00  0.00  0.00  NaN
-    ## classroom_id    3 20  8.00 0.00   8.00    8.00  0.00  8.00  8.00  0.00  NaN
-    ## student_id      4 20 10.50 5.92  10.50   10.50  7.41  1.00 20.00 19.00 0.00
-    ## ses             5 20 52.09 9.58  50.82   52.19  8.70 32.43 72.93 40.50 0.04
+    ##              vars  n  mean   sd median trimmed   mad   min   max range  skew
+    ## math_score      1 20 44.01 7.56  41.29   42.97  6.50 34.46 66.56 32.10  1.32
+    ## classroom_id    2 20  8.00 0.00   8.00    8.00  0.00  8.00  8.00  0.00   NaN
+    ## student_id      3 20 10.50 5.92  10.50   10.50  7.41  1.00 20.00 19.00  0.00
+    ## ses             4 20 62.87 9.87  62.45   63.10 12.56 45.70 77.47 31.78 -0.09
     ##              kurtosis   se
-    ## math_score      -0.90 1.62
-    ## intervention      NaN 0.00
+    ## math_score       1.70 1.69
     ## classroom_id      NaN 0.00
     ## student_id      -1.38 1.32
-    ## ses             -0.23 2.14
+    ## ses             -1.31 2.21
     ## ------------------------------------------------------------ 
     ## classroom_id: 9
     ##              vars  n  mean   sd median trimmed  mad   min   max range  skew
-    ## math_score      1 20 56.17 7.51  55.36   55.14 5.08 46.18 77.69 31.51  1.18
-    ## intervention    2 20  0.00 0.00   0.00    0.00 0.00  0.00  0.00  0.00   NaN
-    ## classroom_id    3 20  9.00 0.00   9.00    9.00 0.00  9.00  9.00  0.00   NaN
-    ## student_id      4 20 10.50 5.92  10.50   10.50 7.41  1.00 20.00 19.00  0.00
-    ## ses             5 20 53.95 9.81  51.95   54.40 9.74 33.33 70.02 36.70 -0.24
+    ## math_score      1 20 51.25 7.26   49.9   50.31 6.63 41.44 70.66 29.22  1.00
+    ## classroom_id    2 20  9.00 0.00    9.0    9.00 0.00  9.00  9.00  0.00   NaN
+    ## student_id      3 20 10.50 5.92   10.5   10.50 7.41  1.00 20.00 19.00  0.00
+    ## ses             4 20 62.47 7.83   61.5   62.60 8.84 46.39 75.23 28.84 -0.06
     ##              kurtosis   se
-    ## math_score       1.33 1.68
-    ## intervention      NaN 0.00
+    ## math_score       0.45 1.62
     ## classroom_id      NaN 0.00
     ## student_id      -1.38 1.32
-    ## ses             -0.63 2.19
+    ## ses             -0.97 1.75
     ## ------------------------------------------------------------ 
     ## classroom_id: 10
-    ##              vars  n  mean    sd median trimmed   mad   min   max range skew
-    ## math_score      1 20 54.07  6.38  53.04   53.53  6.23 45.82 68.98 23.16 0.63
-    ## intervention    2 20  1.00  0.00   1.00    1.00  0.00  1.00  1.00  0.00  NaN
-    ## classroom_id    3 20 10.00  0.00  10.00   10.00  0.00 10.00 10.00  0.00  NaN
-    ## student_id      4 20 10.50  5.92  10.50   10.50  7.41  1.00 20.00 19.00 0.00
-    ## ses             5 20 49.61 11.38  47.71   49.52 13.02 29.86 70.38 40.52 0.11
+    ##              vars  n  mean   sd median trimmed  mad   min   max range  skew
+    ## math_score      1 20 51.52 8.24  50.92   51.42 7.06 37.26 71.09 33.83  0.37
+    ## classroom_id    2 20 10.00 0.00  10.00   10.00 0.00 10.00 10.00  0.00   NaN
+    ## student_id      3 20 10.50 5.92  10.50   10.50 7.41  1.00 20.00 19.00  0.00
+    ## ses             4 20 51.69 5.41  52.16   51.91 4.35 38.59 61.66 23.07 -0.37
     ##              kurtosis   se
-    ## math_score      -0.54 1.43
-    ## intervention      NaN 0.00
+    ## math_score      -0.19 1.84
     ## classroom_id      NaN 0.00
     ## student_id      -1.38 1.32
-    ## ses             -1.13 2.54
+    ## ses             -0.13 1.21
     ## ------------------------------------------------------------ 
     ## classroom_id: 11
-    ##              vars  n  mean   sd median trimmed   mad   min   max range  skew
-    ## math_score      1 20 55.42 7.27  52.62   54.93  5.41 46.01 70.39 24.38  0.62
-    ## intervention    2 20  1.00 0.00   1.00    1.00  0.00  1.00  1.00  0.00   NaN
-    ## classroom_id    3 20 11.00 0.00  11.00   11.00  0.00 11.00 11.00  0.00   NaN
-    ## student_id      4 20 10.50 5.92  10.50   10.50  7.41  1.00 20.00 19.00  0.00
-    ## ses             5 20 50.50 9.98  51.22   50.98 10.29 29.48 65.19 35.71 -0.42
+    ##              vars  n  mean    sd median trimmed   mad   min   max range  skew
+    ## math_score      1 20 51.50  9.58  51.06   51.23 10.97 35.73 68.03 32.30  0.08
+    ## classroom_id    2 20 11.00  0.00  11.00   11.00  0.00 11.00 11.00  0.00   NaN
+    ## student_id      3 20 10.50  5.92  10.50   10.50  7.41  1.00 20.00 19.00  0.00
+    ## ses             4 20 65.36 11.68  65.81   65.41 14.86 44.58 83.95 39.37 -0.05
     ##              kurtosis   se
-    ## math_score      -0.97 1.63
-    ## intervention      NaN 0.00
+    ## math_score      -1.24 2.14
     ## classroom_id      NaN 0.00
     ## student_id      -1.38 1.32
-    ## ses             -0.93 2.23
+    ## ses             -1.41 2.61
     ## ------------------------------------------------------------ 
     ## classroom_id: 12
-    ##              vars  n  mean    sd median trimmed  mad   min   max range skew
-    ## math_score      1 20 54.73  5.74  54.04   54.34 5.96 45.78 68.69 22.91 0.58
-    ## intervention    2 20  1.00  0.00   1.00    1.00 0.00  1.00  1.00  0.00  NaN
-    ## classroom_id    3 20 12.00  0.00  12.00   12.00 0.00 12.00 12.00  0.00  NaN
-    ## student_id      4 20 10.50  5.92  10.50   10.50 7.41  1.00 20.00 19.00 0.00
-    ## ses             5 20 49.26 12.00  50.11   49.21 8.87 25.34 75.71 50.37 0.00
+    ##              vars  n  mean    sd median trimmed   mad   min   max range skew
+    ## math_score      1 20 48.11 11.47  44.57   47.21 13.25 35.30 70.65 35.34 0.41
+    ## classroom_id    2 20 12.00  0.00  12.00   12.00  0.00 12.00 12.00  0.00  NaN
+    ## student_id      3 20 10.50  5.92  10.50   10.50  7.41  1.00 20.00 19.00 0.00
+    ## ses             4 20 59.80  3.43  59.55   59.76  3.68 53.63 66.44 12.81 0.15
     ##              kurtosis   se
-    ## math_score      -0.40 1.28
-    ## intervention      NaN 0.00
+    ## math_score      -1.34 2.56
     ## classroom_id      NaN 0.00
     ## student_id      -1.38 1.32
-    ## ses             -0.19 2.68
+    ## ses             -1.03 0.77
 
 Great! It looks like we have 10 students per classroom and their mean
 math scores range between 45 and 55. Also, thanks to the `psych`
@@ -373,7 +350,7 @@ use the `ggplot2` package. This package allows us to create beautiful
 and informative data visualizations. In the code block below, we will
 use the `ggplot2` package to create a histogram of our math scores.
 Also, let’s bring in the `facet_wrap` function to create a histogram for
-each intervention group.
+each classroom.
 
 ``` r
 # Load ggplot2 package
@@ -382,14 +359,14 @@ library(ggplot2)
 # Plot histogram
 ggplot(data, aes(x = math_score)) +
   geom_histogram(binwidth = 5) +
-  facet_wrap(~intervention)
+  facet_wrap(~classroom_id)
 ```
 
 ![](index_files/figure-markdown_github/unnamed-chunk-4-1.png)
 
-This histogram shows us that the math scores for both intervention
-groups are normally distributed. However, the mean math score for the
-intervention group is slightly higher than the control group.
+This histogram shows us the distribution of math scores across all
+classrooms. For the most part, all classroom scores appear to be
+normally distributed.
 
 ## Centering our Data
 
@@ -439,16 +416,15 @@ Here’s how your dataframe should look like up to this point:
 head(data)
 ```
 
-    ## # A tibble: 6 × 8
-    ##   math_score intervention classroom_id student_id   ses ses_grpmean ses_mc
-    ##        <dbl>        <dbl>        <int>      <int> <dbl>       <dbl>  <dbl>
-    ## 1       44.4            0            1          1  42.1        49.8  -7.65
-    ## 2       47.7            0            1          2  45.0        49.8  -4.79
-    ## 3       65.6            0            1          3  65.0        49.8  15.2 
-    ## 4       50.7            0            1          4  38.6        49.8 -11.1 
-    ## 5       51.3            0            1          5  48.2        49.8  -1.56
-    ## 6       67.2            0            1          6  69.0        49.8  19.3 
-    ## # ℹ 1 more variable: ses_gmc <dbl>
+    ## # A tibble: 6 × 7
+    ##   math_score classroom_id student_id   ses ses_grpmean ses_mc ses_gmc
+    ##        <dbl>        <int>      <int> <dbl>       <dbl>  <dbl>   <dbl>
+    ## 1       56.0            1          1  59.0        54.7   4.32   -3.17
+    ## 2       38.9            1          2  59.4        54.7   4.70   -3.17
+    ## 3       53.3            1          3  53.3        54.7  -1.37   -3.17
+    ## 4       67.6            1          4  63.9        54.7   9.18   -3.17
+    ## 5       35.9            1          5  51.2        54.7  -3.52   -3.17
+    ## 6       52.8            1          6  63.4        54.7   8.66   -3.17
 
 ## Running our Model
 
@@ -476,21 +452,21 @@ summary(null_model)
     ## Formula: math_score ~ 1 + (1 | classroom_id)
     ##    Data: data
     ## 
-    ## REML criterion at convergence: 1687
+    ## REML criterion at convergence: 1795.7
     ## 
     ## Scaled residuals: 
     ##      Min       1Q   Median       3Q      Max 
-    ## -2.91013 -0.69522 -0.07367  0.58727  2.86313 
+    ## -2.32776 -0.68944 -0.01453  0.71440  2.68700 
     ## 
     ## Random effects:
     ##  Groups       Name        Variance Std.Dev.
-    ##  classroom_id (Intercept)  5.987   2.447   
-    ##  Residual                 63.379   7.961   
+    ##  classroom_id (Intercept) 15.75    3.968   
+    ##  Residual                 98.15    9.907   
     ## Number of obs: 240, groups:  classroom_id, 12
     ## 
     ## Fixed effects:
-    ##             Estimate Std. Error      df t value Pr(>|t|)    
-    ## (Intercept)  52.4855     0.8735 11.0000   60.09 3.36e-15 ***
+    ##             Estimate Std. Error     df t value Pr(>|t|)    
+    ## (Intercept)   49.412      1.312 11.000   37.66 5.58e-13 ***
     ## ---
     ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
@@ -499,57 +475,74 @@ for classroom. The random intercept for classroom is represented by
 `(1 | classroom_id)`. The `1` represents the intercept and the
 `classroom_id` represents the groups.
 
-Now, let’s run our full model. We want to see if the intervention has an
-effect on math scores while controlling for SES. We also want to see if
-the intervention has a different effect on math scores for students with
-low SES compared to students with high SES. We will allow the
-intervention vary across classrooms.
+Now, let’s run our full model. We want to see if SES has an effect on
+student math scores. We are also adding an interaction effect between
+student level SES and classroom level SES to investigate how the
+classroom makeup may impact student performance.
 
 ### Full Model
 
 ``` r
 # Run full model
-full_model <- lmer(math_score ~ intervention + ses + intervention*ses + (1 + intervention | classroom_id), data = data)
+full_model <- lmer(math_score ~  ses_mc + ses_gmc + ses_mc:ses_gmc + (1 + ses_mc | classroom_id), data = data)
 summary(full_model)
 ```
 
     ## Linear mixed model fit by REML. t-tests use Satterthwaite's method [
     ## lmerModLmerTest]
-    ## Formula: 
-    ## math_score ~ intervention + ses + intervention * ses + (1 + intervention |  
+    ## Formula: math_score ~ ses_mc + ses_gmc + ses_mc:ses_gmc + (1 + ses_mc |  
     ##     classroom_id)
     ##    Data: data
     ## 
-    ## REML criterion at convergence: 1685.7
+    ## REML criterion at convergence: 1794.6
     ## 
     ## Scaled residuals: 
     ##      Min       1Q   Median       3Q      Max 
-    ## -2.88198 -0.65425 -0.08606  0.59275  2.80765 
+    ## -2.51075 -0.71516 -0.03546  0.56583  2.81292 
     ## 
     ## Random effects:
-    ##  Groups       Name         Variance Std.Dev. Corr
-    ##  classroom_id (Intercept)   3.477   1.865        
-    ##               intervention  3.199   1.789    0.56
-    ##  Residual                  62.655   7.915        
+    ##  Groups       Name        Variance  Std.Dev. Corr
+    ##  classroom_id (Intercept) 1.795e+01 4.23623      
+    ##               ses_mc      4.758e-04 0.02181  1.00
+    ##  Residual                 9.362e+01 9.67589      
     ## Number of obs: 240, groups:  classroom_id, 12
     ## 
     ## Fixed effects:
-    ##                   Estimate Std. Error        df t value Pr(>|t|)    
-    ## (Intercept)       61.07409    4.08533 198.58309  14.950   <2e-16 ***
-    ## intervention      -9.71573    5.46709 201.25036  -1.777   0.0771 .  
-    ## ses               -0.15977    0.07602 230.57755  -2.102   0.0367 *  
-    ## intervention:ses   0.17658    0.10097 229.31073   1.749   0.0816 .  
+    ##                 Estimate Std. Error        df t value Pr(>|t|)    
+    ## (Intercept)     49.41236    1.37316  10.00212  35.984  6.5e-12 ***
+    ## ses_mc           0.23741    0.06580 151.34858   3.608 0.000418 ***
+    ## ses_gmc         -0.05353    0.26161  10.00212  -0.205 0.841981    
+    ## ses_mc:ses_gmc   0.01337    0.01135 132.69882   1.178 0.240735    
     ## ---
     ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
     ## 
     ## Correlation of Fixed Effects:
-    ##             (Intr) intrvn ses   
-    ## interventin -0.747              
-    ## ses         -0.966  0.722       
-    ## intrvntn:ss  0.728 -0.942 -0.753
+    ##             (Intr) ses_mc ss_gmc
+    ## ses_mc      0.085               
+    ## ses_gmc     0.000  0.000        
+    ## ss_mc:ss_gm 0.000  0.162  0.094 
+    ## optimizer (nloptwrap) convergence code: 0 (OK)
+    ## boundary (singular) fit: see help('isSingular')
 
-In this model, we are predicting math scores using intervention, SES,
-and the interaction between intervention and SES. We are also allowing
-the intercept and intervention to vary across classrooms. The random
-intercept and intervention for classroom is represented by
-`(1 + intervention | classroom_id)`.
+In this model, we are predicting math scores using ses_mc, ses_gmc, and
+the interaction between these two variables. We are also allowing the
+intercept and ses_mc to vary across classrooms. The random intercept and
+ses_mc for classroom is represented by `(1 + ses_mc | classroom_id)`.
+
+The summary output provides estimates for the fixed and random effects
+produced by the model.
+
+## Summary
+
+In conclusion, this tutorial provides an introduction to mixed effects
+models (HLM) and explains how they can be used to analyze educational
+research data that exhibit a nested or hierarchical structure. By taking
+into account the nested structure of the data and allowing for the
+estimation of both fixed and random effects, mixed effects models can
+improve the accuracy of the estimates, increase statistical power, and
+provide a more comprehensive understanding of the underlying processes.
+The tutorial uses the R programming language and the `lme4` package to
+illustrate the basics of mixed effects modeling. It also provides
+step-by-step instructions exploring the data using descriptive
+statistics. Future tutorials include the use of mixed effects/HLM
+approaches using longitiduinal data.
