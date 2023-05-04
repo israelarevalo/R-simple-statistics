@@ -364,7 +364,7 @@ data %>%
     ## ses             -1.03 0.77
 
 Great! It looks like we have 10 students per classroom and their mean
-math scores range between 45 and 55. Also, thanks to the `psych`
+math scores range between 40 and 60. Also, thanks to the `psych`
 package, we get detailed group-level descriptive statistics for each
 classroom.
 
