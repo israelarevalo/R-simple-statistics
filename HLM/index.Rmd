@@ -3,8 +3,8 @@ title: "Introduction to Hierarchical Linear Models / Mixed Effects Models in R"
 author: "Israel Arevalo"
 date: "`r Sys.Date()`"
 output:
-  github_document:
-    toc: true
+  md_document:
+    variant: markdown_github
 ---
 
 ## Before we start
@@ -38,12 +38,7 @@ Using mixed effects models can improve the accuracy of the estimates, increase s
 
 Using randomly-generated data, let's build a fictitious dataset to math the scenario above and that we will use to run our HLM Model. 
 
-::: {.callout-warning appearance="simple"}
-
 This step is only required for the instructional nature of this tutorial. You will **not** need to run this step as you do not need to randomly generate your data. Unless you do... in which case, have at it!
-
-:::
-
 
 In the code block below, we will generate a dataframe consisting of math scores from students nested within classrooms who received an intervention of some kind and their respective SES. The purpose of this example is to determine whether the intervention had an effect on math scores, while controlling for SES, and taking into account the nested structure of the data.
 
