@@ -385,7 +385,7 @@ ggplot(data, aes(x = math_score)) +
   facet_wrap(~classroom_id)
 ```
 
-![](index_files/figure-gfm/unnamed-chunk-4-1.png)<!-- -->
+![](hlm_files/figure-gfm/unnamed-chunk-4-1.png)<!-- -->
 
 This histogram shows us the distribution of math scores across all
 classrooms. For the most part, all classroom scores appear to be
@@ -556,10 +556,10 @@ The summary output provides the estimates for the fixed and random
 effects produced by the model. Each of these estimates can be further
 interpreted. Additionally, a correlation matrix of the fixed effects is
 produced. There are packages that can be used to create
-publication-ready tables and offer high flexibility (e.g., sjPlot). An
-example of an unedited table produced by sjPlot is included below.
+publication-ready tables and offer high flexibility (e.g., `sjPlot`). An
+example of an unedited table produced by `sjPlot` is included below.
 
-![](index_files/figure-gfm/sjplot1.png)<!-- -->
+![](hlm_files/figure-gfm/sjplot1.png)<!-- -->
 
 ## Summary
 
