@@ -1,3 +1,24 @@
+Introduction to HLM / Mixed Effects Models in R
+================
+Israel Arevalo
+2023-05-04
+
+- <a href="#before-we-start" id="toc-before-we-start">Before we start</a>
+- <a href="#mixed-effects-models---what-are-they-and-how-can-we-use-them"
+  id="toc-mixed-effects-models---what-are-they-and-how-can-we-use-them">Mixed
+  Effects Models - What are they and how can we use them?</a>
+- <a href="#generating-our-dataset"
+  id="toc-generating-our-dataset">Generating our Dataset</a>
+- <a href="#exploring-our-data" id="toc-exploring-our-data">Exploring our
+  Data</a>
+- <a href="#centering-our-data" id="toc-centering-our-data">Centering our
+  Data</a>
+- <a href="#running-our-model" id="toc-running-our-model">Running our
+  Model</a>
+  - <a href="#null-model" id="toc-null-model">Null Model</a>
+  - <a href="#full-model" id="toc-full-model">Full Model</a>
+- <a href="#summary" id="toc-summary">Summary</a>
+
 ## Before we start
 
 You can find this guide and more on my [github
@@ -20,14 +41,14 @@ Several assumptions about the user will be made within this guide.
 If these assumptions are not met, here are a few guides to reference
 that will get you up to speed
 
--   [Installing
-    RStudio](https://rstudio-education.github.io/hopr/starting.html)
--   [Exporting SPSS dataset to
-    .CSV](https://www.ibm.com/docs/en/spss-statistics/beta?topic=files-exporting-datasets)
--   [Exporting STATA dataset to
-    .csv](https://stats.oarc.ucla.edu/stata/faq/how-do-i-export-stata-dta-files-to-comma-separated-files/)
--   [Exporting Excel file to
-    .csv](https://support.microsoft.com/en-us/office/import-or-export-text-txt-or-csv-files-5250ac4c-663c-47ce-937b-339e391393ba)
+- [Installing
+  RStudio](https://rstudio-education.github.io/hopr/starting.html)
+- [Exporting SPSS dataset to
+  .CSV](https://www.ibm.com/docs/en/spss-statistics/beta?topic=files-exporting-datasets)
+- [Exporting STATA dataset to
+  .csv](https://stats.oarc.ucla.edu/stata/faq/how-do-i-export-stata-dta-files-to-comma-separated-files/)
+- [Exporting Excel file to
+  .csv](https://support.microsoft.com/en-us/office/import-or-export-text-txt-or-csv-files-5250ac4c-663c-47ce-937b-339e391393ba)
 
 ## Mixed Effects Models - What are they and how can we use them?
 
@@ -364,7 +385,7 @@ ggplot(data, aes(x = math_score)) +
   facet_wrap(~classroom_id)
 ```
 
-![](index_files/figure-markdown_github/unnamed-chunk-4-1.png)
+![](index_files/figure-gfm/unnamed-chunk-4-1.png)<!-- -->
 
 This histogram shows us the distribution of math scores across all
 classrooms. For the most part, all classroom scores appear to be

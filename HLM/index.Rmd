@@ -1,10 +1,11 @@
 ---
-title: "Introduction to Hierarchical Linear Models / Mixed Effects Models in R"
+title: "Introduction to HLM / Mixed Effects Models in R"
+subtitle: "The basics"
 author: "Israel Arevalo"
 date: "`r Sys.Date()`"
 output:
-  md_document:
-    variant: markdown_github
+  github_document:
+    toc: true
 ---
 
 ## Before we start
