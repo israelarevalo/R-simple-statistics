@@ -47,9 +47,7 @@ This step is only required for the instructional nature of this tutorial. You wi
 
 In the code block below, we will generate a dataframe consisting of math scores from students nested within classrooms who received an intervention of some kind and their respective SES. The purpose of this example is to determine whether the intervention had an effect on math scores, while controlling for SES, and taking into account the nested structure of the data.
 
-```{r}
-#| warning: false
-#| message: false
+```{r message=FALSE, warning=FALSE}
 
 # Generate sample data
 set.seed(123)
@@ -74,18 +72,14 @@ head(data)
 
 Let's take a look at simple descriptive statisitcs within our data. Running the base (summary) command allows us to look at information such as the minimum, maximum, quartiles, median, and means for each variable within our dataset. You can further customize this command by adding further adjustments to the command itself. For example, if we want to run5 a summary command on just 1 or 2 variables within a dataset containing many other variables, we can adjust our code to specify which variables we are interested in by adding a `$` symbol after the name of the dataset and then specifying the name of the variable  (i.e., `summary(df$intervention`). Below we have run a simple `summary` command to explore our generated dataset. Since we only generated two variables, we do not need to specify which variables we are interested in. 
 
-```{r}
-#| warning: false
-#| message: false
+```{r message=FALSE, warning=FALSE}
 
 summary(data)
 ```
 
 Some summary information may not be necessarily useful (e.g., classroom_id and student_id). When analyzing nested data, we can leverage the `dplyr` package to group students by classroom and then calculate descriptive data. The `dplyr` package is a powerful tool that allows us to conduct data wrangling (cleaning) and analysis. In the code block below, we will use the `dplyr` package to group our students by classroom and then calculate the number of students per classroom and the mean and standard deviation of their math scores. Additionally, we will use the `describeBy` function from the `psych` package to calculate descriptive statistics for each intervention group.
 
-```{r}
-#| warning: false
-#| message: false
+```{r message=FALSE, warning=FALSE}
 
 # Load dplyr and psych package
 library(dplyr)
@@ -111,9 +105,7 @@ Great! It looks like we have 10 students per classroom and their mean math score
 
 Let's visualize this information using a histogram. To do this, we can use the `ggplot2` package. This package allows us to create beautiful and informative data visualizations. In the code block below, we will use the `ggplot2` package to create a histogram of our math scores. Also, let's bring in the `facet_wrap` function to create a histogram for each intervention group.
 
-```{r}
-#| warning: false
-#| message: false
+```{r message=FALSE, warning=FALSE}
 
 # Load ggplot2 package
 library(ggplot2)
@@ -130,9 +122,7 @@ This histogram shows us that the math scores for both intervention groups are no
 
 According to best practices, we want to mean and grand mean center our data before running our mixed effects model. This is because centering our data allows us to interpret the intercept as the mean of the outcome variable when all predictors are at their mean. In the code block below, we will use the `MLMusingR` and `misty` package to mean and grand mean center our data. 
 
-```{r}
-#| warning: false
-#| message: false
+```{r message=FALSE, warning=FALSE}
 
 library(MLMusingR) #using for centering
 library(misty) #used for grand mean centering
@@ -160,9 +150,7 @@ When grand mean centering our data within the context of HLM, our grand mean cen
 
 Here's how your dataframe should look like up to this point:
 
-```{r}
-#| warning: false
-#| message: false
+```{r message=FALSE, warning=FALSE}
 
 head(data)
 ```
@@ -172,9 +160,7 @@ head(data)
 Now that we have explored our data and centered our variables, we are ready to run our HLM model. In the code block below, we will use the `lme4` package to run our models. The `lme4` package is a powerful tool that allows us to run mixed effects models and has a similar syntax to the `lm` function. The `lmerTest` package is an extension of the `lme4` package and allows us to run significance tests for our models.
 
 ### Null Model
-```{r}
-#| warning: false
-#| message: false
+```{r message=FALSE, warning=FALSE}
 
 # Load lme4 package
 library(lme4)
@@ -190,9 +176,7 @@ In this model, we are predicting math scores using a random intercept for classr
 Now, let's run our full model. We want to see if the intervention has an effect on math scores while controlling for SES. We also want to see if the intervention has a different effect on math scores for students with low SES compared to students with high SES. We will allow the intervention vary across classrooms.
 
 ### Full Model
-```{r}
-#| warning: false
-#| message: false
+```{r message=FALSE, warning=FALSE}
 
 # Run full model
 full_model <- lmer(math_score ~ intervention + ses + intervention*ses + (1 + intervention | classroom_id), data = data)
