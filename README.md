@@ -16,4 +16,4 @@ Each tutorial is made using [Quarto](https://www.quarto.org) within [RStudio](ht
 5. [Simple Linear Regression](SimpleRegression/simpleregression.md)
 6. [Multiple Linear Regressions in R (Under Development)]()
 7. [Introduction to SEM in R (Under Development)]()
-8. [Introduction to Hierarchical Linear Model / Mixed Effects Models in R](HLM/index.md)
+8. [Introduction to Hierarchical Linear Model / Mixed Effects Models in R](HLM/hlm.md)
