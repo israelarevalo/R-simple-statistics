@@ -552,8 +552,14 @@ the interaction between these two variables. We are also allowing the
 intercept and ses_mc to vary across classrooms. The random intercept and
 ses_mc for classroom is represented by `(1 + ses_mc | classroom_id)`.
 
-The summary output provides estimates for the fixed and random effects
-produced by the model.
+The summary output provides the estimates for the fixed and random
+effects produced by the model. Each of these estimates can be further
+interpreted. Additionally, a correlation matrix of the fixed effects is
+produced. There are packages that can be used to create
+publication-ready tables and offer high flexibility (e.g., sjPlot). An
+example of an unedited table produced by sjPlot is included below.
+
+![](index_files/figure-gfm/sjplot1.png)<!-- -->
 
 ## Summary
 
