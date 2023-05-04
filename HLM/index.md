@@ -59,9 +59,11 @@ R.
 Using randomly-generated data, let’s build a fictitious dataset to math
 the scenario above and that we will use to run our HLM Model.
 
-This step is only required for the instructional nature of this
-tutorial. You will **not** need to run this step as you do not need to
-randomly generate your data. Unless you do… in which case, have at it!
+> ***Note***
+>
+> This step is only required for the instructional nature of this
+> tutorial. You will **not** need to run this step as you do not need to
+> randomly generate your data. Unless you do… in which case, have at it!
 
 In the code block below, we will generate a dataframe consisting of math
 scores from students nested within classrooms and their respective SES.
@@ -475,12 +477,12 @@ for classroom. The random intercept for classroom is represented by
 `(1 | classroom_id)`. The `1` represents the intercept and the
 `classroom_id` represents the groups.
 
+### Full Model
+
 Now, let’s run our full model. We want to see if SES has an effect on
 student math scores. We are also adding an interaction effect between
 student level SES and classroom level SES to investigate how the
 classroom makeup may impact student performance.
-
-### Full Model
 
 ``` r
 # Run full model
