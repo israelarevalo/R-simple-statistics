@@ -1,13 +1,10 @@
 ---
 title: "Introduction to Hierarchical Linear Models / Mixed Effects Models in R"
 author: "Israel Arevalo"
-date: today
-keep-yaml: true
-format:
-  hugo:
+date: "2023-05-04"
+output:
+  github_document:
     toc: true
-    markdown-headings: setext
-  
 ---
 
 
@@ -377,7 +374,7 @@ ggplot(data, aes(x = math_score)) +
 ```
 
 ::: {.cell-output-display}
-![](index.markdown_strict_files/figure-markdown_strict/unnamed-chunk-4-1.png){width=768}
+![](index_files/figure-html/unnamed-chunk-4-1.png){width=672}
 :::
 :::
 
