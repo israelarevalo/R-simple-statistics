@@ -105,7 +105,7 @@ data %>%
   describeBy(group = "classroom_id")
 ```
 
-Great! It looks like we have 10 students per classroom and their mean math scores range between 40 and 60. Also, thanks to the `psych` package, we get detailed group-level descriptive statistics for each classroom.
+Great! It looks like we have 20 students per classroom and their mean math scores range between 40 and 60. Also, thanks to the `psych` package, we get detailed group-level descriptive statistics for each classroom.
 
 Let's visualize this information using a histogram. To do this, we can use the `ggplot2` package. This package allows us to create beautiful and informative data visualizations. In the code block below, we will use the `ggplot2` package to create a histogram of our math scores. Also, let's bring in the `facet_wrap` function to create a histogram for each classroom.
 

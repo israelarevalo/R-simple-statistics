@@ -1,23 +1,18 @@
 Introduction to HLM / Mixed Effects Models in R
 ================
 Israel Arevalo
-2023-05-04
+2023-05-08
 
-- <a href="#before-we-start" id="toc-before-we-start">Before we start</a>
-- <a href="#mixed-effects-models---what-are-they-and-how-can-we-use-them"
-  id="toc-mixed-effects-models---what-are-they-and-how-can-we-use-them">Mixed
-  Effects Models - What are they and how can we use them?</a>
-- <a href="#generating-our-dataset"
-  id="toc-generating-our-dataset">Generating our Dataset</a>
-- <a href="#exploring-our-data" id="toc-exploring-our-data">Exploring our
-  Data</a>
-- <a href="#centering-our-data" id="toc-centering-our-data">Centering our
-  Data</a>
-- <a href="#running-our-model" id="toc-running-our-model">Running our
-  Model</a>
-  - <a href="#null-model" id="toc-null-model">Null Model</a>
-  - <a href="#full-model" id="toc-full-model">Full Model</a>
-- <a href="#summary" id="toc-summary">Summary</a>
+- [Before we start](#before-we-start)
+- [Mixed Effects Models - What are they and how can we use
+  them?](#mixed-effects-models---what-are-they-and-how-can-we-use-them)
+- [Generating our Dataset](#generating-our-dataset)
+- [Exploring our Data](#exploring-our-data)
+- [Centering our Data](#centering-our-data)
+- [Running our Model](#running-our-model)
+  - [Null Model](#null-model)
+  - [Full Model](#full-model)
+- [Summary](#summary)
 
 ## Before we start
 
@@ -172,7 +167,7 @@ data %>%
   ungroup()
 ```
 
-    ## # A tibble: 12 × 2
+    ## # A tibble: 12 x 2
     ##    classroom_id     n
     ##           <int> <int>
     ##  1            1    20
@@ -196,7 +191,7 @@ data %>%
   ungroup()
 ```
 
-    ## # A tibble: 12 × 3
+    ## # A tibble: 12 x 3
     ##    classroom_id  mean    sd
     ##           <int> <dbl> <dbl>
     ##  1            1  54.7  8.58
@@ -363,7 +358,7 @@ data %>%
     ## student_id      -1.38 1.32
     ## ses             -1.03 0.77
 
-Great! It looks like we have 10 students per classroom and their mean
+Great! It looks like we have 20 students per classroom and their mean
 math scores range between 40 and 60. Also, thanks to the `psych`
 package, we get detailed group-level descriptive statistics for each
 classroom.
@@ -439,7 +434,7 @@ Here’s how your dataframe should look like up to this point:
 head(data)
 ```
 
-    ## # A tibble: 6 × 7
+    ## # A tibble: 6 x 7
     ##   math_score classroom_id student_id   ses ses_grpmean ses_mc ses_gmc
     ##        <dbl>        <int>      <int> <dbl>       <dbl>  <dbl>   <dbl>
     ## 1       56.0            1          1  59.0        54.7   4.32   -3.17
