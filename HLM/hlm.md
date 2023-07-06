@@ -72,8 +72,7 @@ R.
 
 ## Generating our Dataset
 
-Using randomly-generated data, let’s build a fictitious dataset to math
-the scenario above and that we will use to run our HLM Model.
+Using randomly-generated data, let’s build a fictitious dataset that we will use to run our HLM Model. This dataset will include math scores, classroom ID, student ID, and SES. Students will be nested within classrooms. Each student will have a math score and a reported SES.
 
 > ***Note***
 >
