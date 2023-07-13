@@ -38,7 +38,7 @@ that will get you up to speed
 -   [Installing
     RStudio](https://rstudio-education.github.io/hopr/starting.html)
 -   [Exporting SPSS dataset to
-    .CSV](https://www.ibm.com/docs/en/spss-statistics/beta?topic=files-exporting-datasets)
+    .csv](https://www.ibm.com/docs/en/spss-statistics/beta?topic=files-exporting-datasets)
 -   [Exporting STATA dataset to
     .csv](https://stats.oarc.ucla.edu/stata/faq/how-do-i-export-stata-dta-files-to-comma-separated-files/)
 -   [Exporting Excel file to

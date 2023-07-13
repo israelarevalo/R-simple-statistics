@@ -3,16 +3,16 @@ Introduction to HLM / Mixed Effects Models in R
 Israel Arevalo
 2023-05-08
 
-- [Before we start](#before-we-start)
-- [Mixed Effects Models - What are they and how can we use
-  them?](#mixed-effects-models---what-are-they-and-how-can-we-use-them)
-- [Generating our Dataset](#generating-our-dataset)
-- [Exploring our Data](#exploring-our-data)
-- [Centering our Data](#centering-our-data)
-- [Running our Model](#running-our-model)
-  - [Null Model](#null-model)
-  - [Full Model](#full-model)
-- [Summary](#summary)
+- [Introduction to HLM / Mixed Effects Models in R](#introduction-to-hlm--mixed-effects-models-in-r)
+  - [Before we start](#before-we-start)
+  - [Mixed Effects Models - What are they and how can we use them?](#mixed-effects-models---what-are-they-and-how-can-we-use-them)
+  - [Generating our Dataset](#generating-our-dataset)
+  - [Exploring our Data](#exploring-our-data)
+  - [Centering our Data](#centering-our-data)
+  - [Running our Model](#running-our-model)
+    - [Null Model](#null-model)
+    - [Full Model](#full-model)
+  - [Summary](#summary)
 
 ## Before we start
 
@@ -39,7 +39,7 @@ that will get you up to speed
 - [Installing
   RStudio](https://rstudio-education.github.io/hopr/starting.html)
 - [Exporting SPSS dataset to
-  .CSV](https://www.ibm.com/docs/en/spss-statistics/beta?topic=files-exporting-datasets)
+  .csv](https://www.ibm.com/docs/en/spss-statistics/beta?topic=files-exporting-datasets)
 - [Exporting STATA dataset to
   .csv](https://stats.oarc.ucla.edu/stata/faq/how-do-i-export-stata-dta-files-to-comma-separated-files/)
 - [Exporting Excel file to
