@@ -47,7 +47,6 @@ they study per week.
 ``` r
 # Loading Packages
 library(ggplot2) # ggplot2 is used to create the visualization in this tutorial
-library(lm.beta)
 ```
 
 ``` r

@@ -37,9 +37,6 @@ First, we will need to load in the necessary packages and create the simulated d
 
 # Loading Packages
 library(ggplot2) # ggplot2 is used to create the visualization in this tutorial
-library(lm.beta)
-
-
 ```
 
 
@@ -51,7 +48,6 @@ set.seed(12314)  # for reproducibility
 data <- data.frame(student_id = 1:30,
                    math_score = rnorm(30, mean = 70, sd = 10),
                    study_hours = rnorm(30, mean = 10, sd = 2))
-
 ```
 
 Next, we will take a look at the structure of the data set using the `str()` function.
@@ -59,7 +55,6 @@ Next, we will take a look at the structure of the data set using the `str()` fun
 ```{r}
 
 str(data)
-
 ```
 
 The `str()` function allows us to see what types of variables we are working with in our dataset. For this example, we can see that we have a `data.frame` that contains a total of 30 rows (observations) with 3 columns (variables). Specifically, we have `student_id` (an integer type variable), `math_score` (a numeric variable), and `study_hours` (a numeric variable). 
@@ -81,7 +76,6 @@ Now that we have the data loaded, we can fit a simple linear regression model us
 ```{r}
 
 model <- lm(math_score ~ study_hours, data = data)
-
 ```
 
 The output of this function is a linear model object that contains the coefficients of the model, the residuals, and other information.
@@ -93,8 +87,6 @@ We can use the `summary()` function to get a summary of the model and see the co
 ```{r}
 
 summary(model)
-
-
 ```
 
 This output is showing the results of a simple linear regression analysis, which is a statistical method used to model the relationship between a single independent variable `study_hours` and a single dependent variable `math_score`.
@@ -119,7 +111,6 @@ ggplot(data, aes(x = study_hours, y = math_score)) +
   geom_point() +
   geom_smooth(method = "lm", color = "red") +
   ggtitle("Scatter plot of Math Scores vs Study Hours")
-
 ```
 
 This plot shows the relationship between the `math_score` and `study_hours` variables, and can help to further illustrate the strength and direction of the relationship modeled by the linear regression. The line of best fit (in red) shows the direction of the relationship and the slope of the line represents the strength of the relationship.

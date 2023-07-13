@@ -3,10 +3,10 @@ Conducting Multiple Linear Regressions in R
 Israel Arevalo
 2023-07-13
 
+- [Conducting Multiple Linear Regressions in R](#conducting-multiple-linear-regressions-in-r)
 - [Before we start](#before-we-start)
 - [Data Preparation](#data-preparation)
-- [Conducting a Multiple Linear
-  Regression](#conducting-a-multiple-linear-regression)
+- [Conducting a Multiple Linear Regression](#conducting-a-multiple-linear-regression)
 - [Model Summary](#model-summary)
 - [Visualizing the Results](#visualizing-the-results)
 
