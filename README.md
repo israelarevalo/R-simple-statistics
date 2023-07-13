@@ -15,5 +15,5 @@ Each tutorial is made using [Quarto](https://www.quarto.org) within [RStudio](ht
 4. [Analysis of Variance](ANOVA/anova.md)
 5. [Simple Linear Regression](SimpleRegression/simpleregression.md)
 6. [Multiple Linear Regressions in R](MultipleRegression/multipleregression.md)
-7. [Introduction to SEM in R (Under Development)]()
-8. [Introduction to Hierarchical Linear Model / Mixed Effects Models in R](HLM/hlm.md)
+7. [Introduction to Hierarchical Linear Model / Mixed Effects Models in R](HLM/hlm.md)
+8. [Introduction to SEM in R (Under Development)]()
