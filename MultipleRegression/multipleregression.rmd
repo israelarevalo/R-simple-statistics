@@ -27,7 +27,7 @@ For additional information, please follow the links below as necessary.
 - [Installing
   RStudio](https://rstudio-education.github.io/hopr/starting.html)
 - [Exporting SPSS dataset to
-  .CSV](https://www.ibm.com/docs/en/spss-statistics/beta?topic=files-exporting-datasets)
+  .csv](https://www.ibm.com/docs/en/spss-statistics/beta?topic=files-exporting-datasets)
 - [Exporting STATA dataset to
   .csv](https://stats.oarc.ucla.edu/stata/faq/how-do-i-export-stata-dta-files-to-comma-separated-files/)
 - [Exporting Excel file to
@@ -41,9 +41,6 @@ First, we will need to load in the necessary packages and create the simulated d
 
 # Loading Packages
 library(ggplot2) # ggplot2 is used to create the visualization in this tutorial
-library(lm.beta)
-
-
 ```
 
 
@@ -56,7 +53,6 @@ data <- data.frame(student_id = 1:50,
                    math_score = rnorm(50, mean = 70, sd = 10),
                    study_hours = rnorm(50, mean = 10, sd = 3),
                    ses = rnorm(50, mean = 5, sd = 3))
-
 ```
 
 Next, we will take a look at the structure of the data set using the `str()` function.
@@ -64,7 +60,6 @@ Next, we will take a look at the structure of the data set using the `str()` fun
 ```{r}
 
 str(data)
-
 ```
 
 The `str()` function allows us to see what types of variables we are working with in our dataset. For this example, we can see that we have a `data.frame` that contains a total of 30 rows (observations) with 3 columns (variables). Specifically, we have `student_id` (an integer type variable), `math_score` (a numeric variable), `study_hours` (a numeric variable), and `ses` (a numeric variable). 
@@ -78,7 +73,6 @@ Now that we have the data loaded, we can fit a multiple linear regression model 
 ```{r}
 
 model <- lm(math_score ~ study_hours + ses, data = data)
-
 ```
 
 The output of this function is a linear model object that contains the coefficients of the model, the residuals, and other information.
@@ -90,8 +84,6 @@ We can use the `summary()` function to get a summary of the model and see the co
 ```{r}
 
 summary(model)
-
-
 ```
 
 This output is showing the results of a multiple linear regression analysis, which is a statistical method used to model the relationship between a multiple independent variables `study_hours` and `ses` and a single dependent variable `math_score`.
@@ -123,9 +115,6 @@ ggplot(data, aes(x = study_hours, y = math_score)) +
   theme(legend.position = "right") +
   guides(linetype = guide_legend(override.aes = list(color = c("red", "blue")))) +
   coord_cartesian(xlim = c(4, 16))
-
-
-
 ```
 
 This plot shows the relationships between the `math_score` and `study_hours` / `ses` variables. This helps to further illustrate the strength and direction of the relationships modeled by the linear regression. The lines of best fit (blue for `study_hours` and red for `ses`) show the direction and strength of the relationship.

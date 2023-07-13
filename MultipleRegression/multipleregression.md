@@ -34,7 +34,7 @@ For additional information, please follow the links below as necessary.
 - [Installing
   RStudio](https://rstudio-education.github.io/hopr/starting.html)
 - [Exporting SPSS dataset to
-  .CSV](https://www.ibm.com/docs/en/spss-statistics/beta?topic=files-exporting-datasets)
+  .csv](https://www.ibm.com/docs/en/spss-statistics/beta?topic=files-exporting-datasets)
 - [Exporting STATA dataset to
   .csv](https://stats.oarc.ucla.edu/stata/faq/how-do-i-export-stata-dta-files-to-comma-separated-files/)
 - [Exporting Excel file to
@@ -50,7 +50,6 @@ they study per week.
 ``` r
 # Loading Packages
 library(ggplot2) # ggplot2 is used to create the visualization in this tutorial
-library(lm.beta)
 ```
 
 ``` r
