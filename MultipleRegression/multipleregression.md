@@ -1,0 +1,228 @@
+Conducting Multiple Linear Regressions in R
+================
+Israel Arevalo
+2023-07-13
+
+- [Before we start](#before-we-start)
+- [Data Preparation](#data-preparation)
+- [Conducting a Multiple Linear
+  Regression](#conducting-a-multiple-linear-regression)
+- [Model Summary](#model-summary)
+- [Visualizing the Results](#visualizing-the-results)
+
+# Before we start
+
+You can find this guide and more on my [github
+page](https://github.com/israelarevalo/R-simple-statistics-tutorials).
+
+Multiple linear regression is a statistical method used to model the
+relationship between multiple independent variables and a single
+dependent variable. Like for simple regressions, the `lm()` function can
+also be used to fit a multiple linear regression model. In this
+tutorial, we will use simulated educational data to demonstrate how to
+conduct a multiple linear regression in R.
+
+As in previous guides, several assumptions about the user will be made.
+
+1.  You have installed R and an IDE such as RStudio on your computer
+2.  You have a dataset to work with (we will generate a dataset in this
+    tutorial but you will need a dataset to run your own analysis
+    outside of the tutorial, of course)
+
+For additional information, please follow the links below as necessary.
+
+- [Installing
+  RStudio](https://rstudio-education.github.io/hopr/starting.html)
+- [Exporting SPSS dataset to
+  .CSV](https://www.ibm.com/docs/en/spss-statistics/beta?topic=files-exporting-datasets)
+- [Exporting STATA dataset to
+  .csv](https://stats.oarc.ucla.edu/stata/faq/how-do-i-export-stata-dta-files-to-comma-separated-files/)
+- [Exporting Excel file to
+  .csv](https://support.microsoft.com/en-us/office/import-or-export-text-txt-or-csv-files-5250ac4c-663c-47ce-937b-339e391393ba)
+
+# Data Preparation
+
+First, we will need to load in the necessary packages and create the
+simulated data set. For this tutorial, we will create a data set that
+contains information on students’ math scores and the number of hours
+they study per week.
+
+``` r
+# Loading Packages
+library(ggplot2) # ggplot2 is used to create the visualization in this tutorial
+library(lm.beta)
+```
+
+``` r
+set.seed(4251)  # for reproducibility
+
+# create the data set (this data is purposefully manipulated to yield significant results for the purpose of the tutorial)
+data <- data.frame(student_id = 1:50,
+                   math_score = rnorm(50, mean = 70, sd = 10),
+                   study_hours = rnorm(50, mean = 10, sd = 3),
+                   ses = rnorm(50, mean = 5, sd = 3))
+```
+
+Next, we will take a look at the structure of the data set using the
+`str()` function.
+
+``` r
+str(data)
+```
+
+    ## 'data.frame':    50 obs. of  4 variables:
+    ##  $ student_id : int  1 2 3 4 5 6 7 8 9 10 ...
+    ##  $ math_score : num  69.3 89.6 81.3 71.5 65.5 ...
+    ##  $ study_hours: num  4.65 6.77 10.92 12.82 10.99 ...
+    ##  $ ses        : num  2.086 3.964 2.446 6.35 0.746 ...
+
+The `str()` function allows us to see what types of variables we are
+working with in our dataset. For this example, we can see that we have a
+`data.frame` that contains a total of 30 rows (observations) with 3
+columns (variables). Specifically, we have `student_id` (an integer type
+variable), `math_score` (a numeric variable), `study_hours` (a numeric
+variable), and `ses` (a numeric variable).
+
+A brief summary of variable types can be reviewed in the simple
+regressions tutorial found
+[here](https://github.com/israelarevalo/R-simple-statistics-tutorials/blob/main/SimpleRegression/simpleregression.md).
+
+# Conducting a Multiple Linear Regression
+
+Now that we have the data loaded, we can fit a multiple linear
+regression model using the `lm()` function. The function takes the form
+`lm(y ~ x1 + x2, data)`, where y is the dependent variable and x1 and x2
+are the independent variables.
+
+``` r
+model <- lm(math_score ~ study_hours + ses, data = data)
+```
+
+The output of this function is a linear model object that contains the
+coefficients of the model, the residuals, and other information.
+
+# Model Summary
+
+We can use the `summary()` function to get a summary of the model and
+see the coefficients of the model.
+
+``` r
+summary(model)
+```
+
+    ## 
+    ## Call:
+    ## lm(formula = math_score ~ study_hours + ses, data = data)
+    ## 
+    ## Residuals:
+    ##      Min       1Q   Median       3Q      Max 
+    ## -20.8796  -5.4945   0.8898   6.1948  19.4055 
+    ## 
+    ## Coefficients:
+    ##             Estimate Std. Error t value Pr(>|t|)    
+    ## (Intercept)  80.2031     5.3902  14.879   <2e-16 ***
+    ## study_hours  -1.1788     0.5115  -2.305   0.0257 *  
+    ## ses           0.7216     0.3911   1.845   0.0713 .  
+    ## ---
+    ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+    ## 
+    ## Residual standard error: 9.472 on 47 degrees of freedom
+    ## Multiple R-squared:  0.1385, Adjusted R-squared:  0.1019 
+    ## F-statistic: 3.779 on 2 and 47 DF,  p-value: 0.03006
+
+This output is showing the results of a multiple linear regression
+analysis, which is a statistical method used to model the relationship
+between a multiple independent variables `study_hours` and `ses` and a
+single dependent variable `math_score`.
+
+The first part of the output shows the residuals. Residuals are the
+differences between the observed values and the predicted values of the
+dependent variable. The Min, 1Q, Median, 3Q and Max values give an idea
+of the range and distribution of the residuals.
+
+The second part of the output shows the coefficients of the model,
+including the intercept (the value of the dependent variable when the
+independent variable is 0) and the slopes (the change in the dependent
+variable for a one-unit change in the independent variable). The
+estimate column shows the value of the coefficient, the Std. Error
+column shows the standard error of the estimate, the t value column
+shows the t-value, and the Pr(\>\|t\|) column shows the p-value
+(significance).
+
+For our results, we can see that our p-value for our intercept is
+statistically significant with p \< 0.05. We also see that our
+`study_hours` are also statistically significant at p = `0.0257`.
+Lastly, we have the p-value for our `ses` variable as p = 0.0713
+(statistically significant if our alpha is set at 0.10). From these
+results, we can derive a relationship between `math_score` and
+`study_hours` (and perhaps `ses` - depending on your alpha). This can be
+further interpreted as for every 1 unit change in `study_hours`, there
+is a decrease of 1.1788 units in `math_score`. This can be similarly
+applied to other variables within your model.
+
+The next value is the Multiple R-squared value which represents the
+proportion of the variance in the dependent variable that is predictable
+from the independent variables. In this case, the Multiple R-squared
+value is `0.1385` and can be interpreted as 14% of the variance in
+`math_score` is accounted for by `study_hours` and `ses`. Of note, the
+output also provides an Adjusted R-squared value, which is recommended
+to use when your model uses more than one independent variable. In our
+case, our Adjusted R-squared value of `0.1019` indicates that our model
+explains 10% of the variance in `math_score`.
+
+Overall, the results show that the slope `study_hours` is statistically
+significant, this means that the number of hours studied per week is
+strongly related to the `math scores`. Therefore, the relationship
+between the two variables is strong and it is possible to make
+**predictions** about math scores based on the number of hours studied
+per week. As per `ses`, the typical alpha of 0.05 indicates this
+variable does not meet the threshold for statistical significance, and
+therefore would not be appropriate to interpret further. However, for
+the purposes of this tutorial, we will include `ses` in the
+visualization below.
+
+# Visualizing the Results
+
+Finally, we can create a scatter plot of the data with the line of best
+fit to visualize the relationship between these variables.
+
+``` r
+ggplot(data, aes(x = study_hours, y = math_score)) +
+  geom_point() +
+  geom_smooth(aes(linetype = "study_hours"), method = "lm", color = "red") +
+  geom_smooth(aes(x = ses, y = math_score, linetype = "ses"), method = "lm", color = "blue") +
+  scale_linetype_manual(values = c("dashed", "solid")) +
+  scale_color_manual(values = c("red", "blue")) +
+  ggtitle("Scatter plot of Math Scores vs Study Hours + SES") +
+  labs(linetype = "Variable", color = "Variable") +
+  theme(legend.position = "right") +
+  guides(linetype = guide_legend(override.aes = list(color = c("red", "blue")))) +
+  coord_cartesian(xlim = c(4, 16))
+```
+
+![](multipleregression_files/figure-gfm/unnamed-chunk-6-1.png)<!-- -->
+
+This plot shows the relationships between the `math_score` and
+`study_hours` / `ses` variables. This helps to further illustrate the
+strength and direction of the relationships modeled by the linear
+regression. The lines of best fit (blue for `study_hours` and red for
+`ses`) show the direction and strength of the relationship.
+
+In summary, this tutorial demonstrated how to conduct a multiple linear
+regression using simulated educational data in R. The steps outlined in
+this tutorial can be applied to any data set and any set of variables.
+Multiple linear regression is a useful tool for modeling the
+relationship between a multiple independent variables and a single
+dependent variable. Further, it can provide insights into the extent to
+which the independent variables are related to the dependent variable.
+Additionally, visualizing the results using the `ggplot2` package can
+help to further understand the relationship between the variables.
+
+Please keep in mind that this is a basic multiple linear regression, and
+in practice, the data might be affected by other variables that can
+change the relationship between the dependent and independent variables.
+So, it’s important to consider other factors that may be impacting the
+relationship between the variables and use appropriate statistical
+methods accordingly. In practice, it is important to be mindful of
+extant literature to help guide your study from conceptualization to
+dissemination.
